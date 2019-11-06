@@ -58,7 +58,51 @@ $ sudo apt upgrade
  
 pyenv
 
+# Development Application
 
+## Prepare
+Let's setup your Python development environment.
+
+### Python additional modules
+
+```shell
+pip install Django
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+pip install drf-yasg
+```
+
+### Atom IDE
+You need additional installing for Atom [ide-python][idepy].
+
+```shell
+python -m pip install 'python-language-server[all]'
+```
+
+Or you can use `requirements.txt`.
+
+```
+pip install -r requirements.txt
+```
+
+## First step
+
+```shell
+mkdir django-rpi-tph-monitor
+cd django-rpi-tph-monitor
+```
+
+```shell
+django-admin startproject tph
+cd tph
+```
+
+```shell
+python manage.py runserver
+```
+Access `http://localhost:8000/` on your browser.
+![Django First Boot](assets/images/first-django.png)
 
 ----
 [raspi]: https://www.raspberrypi.org
@@ -66,3 +110,4 @@ pyenv
 [raspbian]: https://www.raspbian.org
 [ig]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 [etcher]: https://www.balena.io/etcher/
+[idepy]: https://github.com/lgeiger/ide-python
