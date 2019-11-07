@@ -18,10 +18,11 @@ You must get somethings next list.
 * Python development environment
   * We supported only Python 3.7 upper version.
 
-## Set up
+## Set up Raspberry Pi
+You must set up your Raspberry Pi.
 
 ### download newest Raspbian
-We recommend using official Raspbian which can download from [Raspberry Pi Downloads][rpbod].  
+I recommend using official Raspbian which can download from [Raspberry Pi Downloads][rpbod].  
 You will choose "Raspbian Buster with desktop and recommended software" or
 "Raspbian Buster with desktop".
 
@@ -33,8 +34,6 @@ macOS
 ```shell
 $ brew cask install balenaetcher
 ```
-
-
 
 ### First boot
 Only first boot time, You must connect USB keyboard, USB mouse, and monitor via HDMI.  
@@ -55,10 +54,56 @@ $ sudo apt update
 ```shell
 $ sudo apt upgrade
 ```
- 
-pyenv
+
+## Development environment
+You can development on your Raspberry Pi.  
+I recommend preparing development environment on your Mac or PC.  
+
+### pyenv and pyenv-virtualenv
+Please install [pyenv][pyenv] and [pyenv-virtualenv][pevir].
+
+#### Install Python
+
+```shell
+pyenv install 3.8.0
+```
+And setup pyenv-virtualenv
+```shell
+pyenv virtualenv 3.8.0 djrpi380
+```
+
+c.f. my home directory.
+```shell
+$ pyenv versions
+* system (set by /Users/mitsu/.pyenv/version)
+  3.7.4
+  3.7.4/envs/djsample374
+  3.8.0
+  3.8.0/envs/djrpi380
+  djrpi380
+  djsample374
+$ python --version
+Python 2.7.16
+```
+
+my environment directory.
+```shell
+$ cd ~/git/hub/django-rpi-tph-monitor
+$ pyenv local djrpi380
+$ pyenv versions
+  system
+  3.7.4
+  3.7.4/envs/djsample374
+  3.8.0
+  3.8.0/envs/djrpi380
+* djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
+  djsample374
+$ python --version
+Python 3.8.0
+```
 
 # Development Application
+Let's development "Home automation application".
 
 ## Prepare
 Let's setup your Python development environment.
@@ -110,4 +155,6 @@ Access `http://localhost:8000/` on your browser.
 [raspbian]: https://www.raspbian.org
 [ig]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 [etcher]: https://www.balena.io/etcher/
+[pyenv]: https://github.com/pyenv/pyenv
+[pevir]: https://github.com/pyenv/pyenv-virtualenv
 [idepy]: https://github.com/lgeiger/ide-python
