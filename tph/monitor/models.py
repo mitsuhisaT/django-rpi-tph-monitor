@@ -8,7 +8,9 @@ class BME280(models.Model):
     Store from BME280 sensor.
     BME280 senses pressure, humidity and temperature.
 
-    See https://www.bosch-sensortec.com/bst/products/all_products/bme280
+    Sees:
+        https://www.bosch-sensortec.com/bst/products/all_products/bme280
+        https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/
 
     """
 
