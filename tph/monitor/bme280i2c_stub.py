@@ -36,13 +36,13 @@ class BME280I2C:
         self.i2c_addr = i2c_addr
         self.i2c = None  # smbus.SMBus(1)
         self.cal = {}               # Calibration data
-        self.adc_T = random.randint(524000, 524288)
-        self.adc_P = random.randint(524000, 524288)
-        self.adc_H = random.randint(32700, 32768)
-        self.T = random.uniform(-30, 50)
-        self.P = random.uniform(800, 1200)
-        self.H = random.uniform(0, 100)
-        self.t_fine = random.randint(111000, 112000)
+        self.adc_T = 0
+        self.adc_P = 0
+        self.adc_H = 0
+        self.T = 0
+        self.P = 0
+        self.H = 0
+        self.t_fine = 0
 
     def print_cal(self):
         cal_dummys = [
@@ -52,9 +52,39 @@ class BME280I2C:
         for k, v in sorted(cal_dummys):
             print(f' {k} : {v}')
 
+    def forced(self):
+        """
+        Measure sensor data and store in adc_T, adc_P and adc_H.
+
+        0xF5, [0x00]: config
+        0xF2, [0x05]: ctrl_hum, oversampling x16
+        0xF4, [0xB5]: ctrl_meas, oversampling x16, forced mode
+        """
+        self.adc_P = random.randint(524000, 524288)
+        self.adc_T = random.randint(524000, 524288)
+        self.adc_H = random.randint(32700, 32768)
+
+    def comp_T(self):
+        """Calculate temp from adc_T and calibration data."""
+        self.t_fine = random.randint(111000, 112000)
+        self.T = random.uniform(-30, 50)
+
+    def comp_P(self):
+        """Calculate pressure from adc_P and calibration data."""
+        self.P = random.uniform(800, 1200)
+
+    def comp_H(self):
+        """Calculate humidity from adc_H and calibration data."""
+        self.H = random.uniform(0, 100)
+
     def meas(self):
         """Measure T/P/H."""
         if self.i2c_addr == BME280CH1_ADDR:
+            # self.read_cal()
+            self.forced()
+            self.comp_T()
+            self.comp_P()
+            self.comp_H()
             return True
         else:
             return False
