@@ -36,13 +36,13 @@ class BME280I2C:
         self.i2c_addr = i2c_addr
         self.i2c = None  # smbus.SMBus(1)
         self.cal = {}               # Calibration data
-        self.adc_T = random.uniform(0, 64)
-        self.adc_P = random.uniform(0, 64)
-        self.adc_H = random.uniform(0, 64)
+        self.adc_T = random.randint(524000, 524288)
+        self.adc_P = random.randint(524000, 524288)
+        self.adc_H = random.randint(32700, 32768)
         self.T = random.uniform(-30, 50)
         self.P = random.uniform(800, 1200)
         self.H = random.uniform(0, 100)
-        self.t_fine = 0
+        self.t_fine = random.randint(111000, 112000)
 
     def print_cal(self):
         cal_dummys = [
@@ -66,9 +66,10 @@ class BME280I2C:
         print(f' adc_H  : {self.adc_H}')
 
     def print_meas(self):
-        print( ' Temp     : {:.1f}C'.format(self.T))
-        print( ' Pressure : {:.1f}hPa'.format(self.P))
-        print( ' Humidity : {:.1f}%'.format(self.H))
+        print(' Temp     : {:.1f}C'.format(self.T))
+        print(' Pressure : {:.1f}hPa'.format(self.P))
+        print(' Humidity : {:.1f}%'.format(self.H))
+
 
 def main():
     bme280ch1 = BME280I2C(BME280CH1_ADDR)
@@ -85,6 +86,7 @@ def main():
         bme280ch2.print_cal()
         bme280ch2.print_reg()
         bme280ch2.print_meas()
+
 
 if __name__ == '__main__':
     main()
