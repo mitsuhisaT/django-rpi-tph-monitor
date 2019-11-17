@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'monitor.apps.MonitorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,6 +120,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# for RPi TPH Monitor
+# https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/
+
+BME280CH1_ADDR = 0x76
+BME280CH2_ADDR = 0x77
 
 # for Development on your macOS, Ubuntu or MS-Windows
 

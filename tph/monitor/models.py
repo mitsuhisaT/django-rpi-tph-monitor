@@ -1,5 +1,6 @@
 """Models definition."""
 from django.db import models
+from django.utils import timezone
 
 
 class BME280(models.Model):
@@ -18,3 +19,7 @@ class BME280(models.Model):
     humidity = models.FloatField()
     temperature = models.FloatField()
     measure_datetime = models.DateTimeField(auto_now_add=True)
+
+    def ___str___(self):
+        """About this BME2880 Model."""
+        return 'Store pressure, humidity and temperature.'
