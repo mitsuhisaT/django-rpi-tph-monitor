@@ -17,9 +17,9 @@ class BME280dc():
             p (float): pressure 気圧
             h (float): humidity 湿度
         """
-        self.__t = t
-        self.__p = p
-        self.__h = h
+        self.t = t
+        self.p = p
+        self.h = h
         self.__mdt = timezone.now()
 
     @property

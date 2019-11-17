@@ -39,9 +39,9 @@ class BME280I2C:
         self.adc_T = 0
         self.adc_P = 0
         self.adc_H = 0
-        self.T = 0
-        self.P = 0
-        self.H = 0
+        self.T = 0.0
+        self.P = 0.0
+        self.H = 0.0
         self.t_fine = 0
 
     def print_cal(self):

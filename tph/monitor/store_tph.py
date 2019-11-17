@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Store temperature, pressure and humidity from BME230I2C.
 """
@@ -5,9 +6,9 @@ from datetime import datetime
 import logging
 from django.utils import timezone
 # from bme280i2c import BME280I2C
-from bme280i2c_stub import BME280I2C
-from data_container import BME280dc
-from models import BME280
+from .bme280i2c_stub import BME280I2C
+from .data_container import BME280dc
+from .models import BME280
 
 logger = logging.getLogger(__name__)
 
@@ -44,15 +45,19 @@ class StoreTph():
         """Store temperature, pressure and humidity into BME280."""
         logger.debug('start')
         if self.__getTPH():
-            BME280(
-                temperature=self.__bme280dc.t,
-                pressure=self.__bme280dc.p,
-                humidity=self.__bme280dc.h,
-            ).save()
+            bme280 = BME280(
+                            temperature=self.__bme280dc.t,
+                            pressure=self.__bme280dc.p,
+                            humidity=self.__bme280dc.h,
+                            )
+            print(repr(bme280))
+            bme280.save()
+            logger.debug('end')
+            return bme280.id
         else:
             logger.woarn("Can't get datas from BMC280I2C.")
             # TODO exception
-        logger.debug('end')
+            return False
 
     def saveData(self, bme280dc):
         """Store designated datas."""
@@ -83,3 +88,18 @@ class StoreTph():
                                      measure_datetime__lte=bdt,
                                      measure_datetime__gte=edt,
                                     ).values()
+# 
+# 
+# def main():
+#     logger.debug('test store.')
+# 
+#     # from django.conf import settings
+#     # settings.configure()
+# 
+#     storeTph = StoreTph(0x76)
+#     storeTph.save()
+#     logger.debug('end.')
+# 
+# 
+# if __name__ == '__main__':
+#     main()
