@@ -97,5 +97,5 @@ class StoreTphTests(TestCase):
         """Save data."""
         storeTph = StoreTph(ts.BME280CH1_ADDR)
         id = storeTph.save()
-        mbe280 = BME280().objects.get(id=id)
-        self.assertEqual(id, mbe280['id'])
+        mbe280 = BME280.objects.filter(id=id).get()
+        self.assertEqual(id, mbe280.id)

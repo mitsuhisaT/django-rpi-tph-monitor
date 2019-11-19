@@ -79,6 +79,36 @@ class BME280I2C:
         self.H = 0
         self.t_fine = 0
 
+    @property
+    def T(self):
+        """Get T(temperature)."""
+        return self.__T
+
+    @T.setter
+    def T(self, T):
+        """Set T(temperature)."""
+        self.__T = T
+
+    @property
+    def P(self):
+        """Get P(pressure)."""
+        return self.__P
+
+    @P.setter
+    def P(self, P):
+        """Set P(pressure)."""
+        self.__P = P
+
+    @property
+    def H(self):
+        """Get H(humidity)."""
+        return self.__H
+
+    @H.setter
+    def H(self, H):
+        """Set H(humidity)."""
+        self.__H = H
+
     def read_address(self, addr, length):
         """I2C read length byte from addr."""
         try:

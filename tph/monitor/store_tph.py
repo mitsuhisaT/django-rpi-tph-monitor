@@ -28,9 +28,9 @@ class StoreTph():
         """Get temperature, pressure and humidity from BME230I2C."""
         logger.debug('start')
         if self.__bme280i2c.meas():
-            self.__bme280dc.t = self.__bme280i2c.comp_T()
-            self.__bme280dc.p = self.__bme280i2c.comp_P()
-            self.__bme280dc.h = self.__bme280i2c.comp_H()
+            self.__bme280dc.t = self.__bme280i2c.T
+            self.__bme280dc.p = self.__bme280i2c.P
+            self.__bme280dc.h = self.__bme280i2c.H
             logger.debug('end')
             return True
         else:
