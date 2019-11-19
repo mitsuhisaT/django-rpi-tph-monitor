@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Store temperature, pressure and humidity from BME230I2C.
 """
@@ -85,21 +84,6 @@ class StoreTph():
         logger.debug('start')
         logger.debug('end')
         return BME280.objects.filter(
-                                     measure_datetime__lte=bdt,
-                                     measure_datetime__gte=edt,
+                                     measure_datetime__gte=bdt,
+                                     measure_datetime__lte=edt,
                                     ).values()
-# 
-# 
-# def main():
-#     logger.debug('test store.')
-# 
-#     # from django.conf import settings
-#     # settings.configure()
-# 
-#     storeTph = StoreTph(0x76)
-#     storeTph.save()
-#     logger.debug('end.')
-# 
-# 
-# if __name__ == '__main__':
-#     main()

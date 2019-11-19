@@ -1,6 +1,8 @@
 """Test."""
 import datetime
 import logging
+import time
+from django.utils import timezone
 from django.test import TestCase
 # from django.utils import timezone
 from .data_container import BME280dc
@@ -99,3 +101,15 @@ class StoreTphTests(TestCase):
         id = storeTph.save()
         mbe280 = BME280.objects.filter(id=id).get()
         self.assertEqual(id, mbe280.id)
+
+    def test_betweenDatetime(self):
+        """Get data."""
+        startdt = timezone.now()
+        for i in range(5):
+            storeTph = StoreTph(ts.BME280CH1_ADDR)
+            storeTph.save()
+            time.sleep(1)
+        bdt = startdt + datetime.timedelta(seconds=1)
+        edt = startdt + datetime.timedelta(seconds=4)
+        bme280s = storeTph.betweenDatetime(bdt=bdt, edt=edt)
+        self.assertEqual(len(bme280s), 3)
