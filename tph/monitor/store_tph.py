@@ -4,7 +4,7 @@ Store temperature, pressure and humidity from BME230I2C.
 from datetime import datetime
 import logging
 from django.utils import timezone
-# from bme280i2c import BME280I2C
+# from .bme280i2c import BME280I2C
 from .bme280i2c_stub import BME280I2C
 from .data_container import BME280dc
 from .models import BME280
