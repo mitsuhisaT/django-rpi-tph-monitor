@@ -28,9 +28,13 @@ def show(request):
         raise Http404("Can't get datas from BME280")
     logger.debug('end')
     return render(request, 'monitor/show.html', {
+        'site_title': 'TPH monitor',
+        'title': 'Show current environment:pressure, humidity and temperature',
         'pressure': f'{bme280i2c.P:+4.2f}',
         'humidity': f'{bme280i2c.H:+3.2f}',
         'temperature': f'{bme280i2c.T:+3.2f}',
+        'year': 2019,
+        'owner': ts.OWNER,
     })
 
 

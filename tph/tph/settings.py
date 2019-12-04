@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'monitor.apps.MonitorConfig',
+    'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -133,9 +133,10 @@ STATICFILES_FINDERS = [
 
 # for SASS/SCSS
 # https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-python-way/
-COMPRESS_ROOT = os.path.join(BASE_DIR, 'static/bootstrap')
+COMPRESS_ROOT = os.path.join(BASE_DIR, 'static')
 COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
+    # ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-scss', 'pysassc {infile} {outfile}'),
 )
 
 
@@ -148,3 +149,8 @@ BME280CH2_ADDR = 0x77
 # for Development on your macOS, Ubuntu or MS-Windows
 
 ON_RASPBERRY_PI = False
+
+
+# miscs
+
+OWNER = 'PCI Techno ML and AI study group.'

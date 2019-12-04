@@ -1,7 +1,12 @@
-<h1>Show current environment</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+{% extends "tph/tph_base.html" %}
+{% block tphheader %}
+<h1>{{ title }}</h1>
+{% endblock %}
+{% block tphmain %}
 <div>pressure:{{ pressure }}</div>
 <div>humidity:{{ humidity }}</div>
 <div>temperature:{{ temperature }}</div>
+{% endblock %}
+{% block tphfooter %}
+<p>Copyright&nbsp;(c)&nbsp;{{ year }}&nbsp;{{ owner }},&nbsp;All&nbsp;rights&nbsp;reserved.</p>
+{% endblock %}
