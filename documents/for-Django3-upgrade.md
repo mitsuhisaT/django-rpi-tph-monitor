@@ -23,15 +23,15 @@ $ pyenv local dj3rpi375
 
 ```shell
 $ pip install --upgrade Django
-$ pip install --upgrade pip
 $ pip install --upgrade djangorestframework
 $ pip install --upgrade markdown
 $ pip install --upgrade django-filter
 $ pip install --upgrade drf-yasg
 $ pip install --upgrade django-bootstrap4
-$ pip install -e git://github.com/django-compressor/django-compressor.git@a5bfd775450428e1a261b88e1e5424bfb4dde081#egg=django_compressor
+$ pip install -e git://github.com/mitsuhisaT/django-compressor.git@six1.13#egg=django_compressor
 $ pip install --upgrade django-libsass
 ```
+
 
 about django-compressor [issue 963][dc963].
 
