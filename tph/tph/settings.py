@@ -153,4 +153,4 @@ ON_RASPBERRY_PI = False
 
 # miscs
 
-OWNER = 'PCI Techno ML and AI study group.'
+OWNER = 'ML and AI study group.'

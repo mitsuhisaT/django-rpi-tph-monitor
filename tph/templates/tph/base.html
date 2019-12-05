@@ -9,7 +9,6 @@
 {% block extrahead %}{% endblock %}
 {% load compress %}
 {% compress css %}
-  <link type="text/x-scss" href="{% static 'bootstrap/bootstrap.scss' %}" rel="stylesheet" media="screen">
   <link type="text/x-scss" href="{% static 'sass/tph.scss' %}" rel="stylesheet" media="screen">
 {% endcompress %}
 {% block responsive %}
@@ -21,8 +20,10 @@
 </head>
 {% load i18n %}
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" data-admin-utc-offset="{% now "Z" %}">
-  <header>{% block tphheader %}{% endblock %}</header>
-  <main>{% block tphmain %}{% endblock %}</main>
-  <footer>{% block tphfooter %}{% endblock %}</footer>
+  <div class="container">
+    <header>{% block tphheader %}{% endblock %}</header>
+    <main>{% block tphmain %}{% endblock %}</main>
+    <footer class="text-center">{% block tphfooter %}{% endblock %}</footer>
+  </div>
 </body>
 </html>
