@@ -7,6 +7,7 @@ coreschema>=0.0.4
 Django>=3.0
 django-appconf>=1.0.3
 django-bootstrap4>=1.0.1
+-e git://github.com/mitsuhisaT/django-background-tasks.git@master#egg=django-background-tasks
 -e git://github.com/mitsuhisaT/django-compressor.git@six1.13#egg=django_compressor
 django-filter>=2.2.0
 djangorestframework>=3.10.3

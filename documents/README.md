@@ -71,6 +71,28 @@ pip install django-libsass
 ### Django 3.0.x
 [How to use Bootstrap4 Sass in Django 3.0](for-Django3-upgrade.md)
 
+### Background tasks
+I selected [Django Background Tasks][bts] for save datas interval.  
+For Django 2.2, `pip install django-background-tasks`.  
+But Django 3.0, not yet support.
+
+#### Django 3.0
+You must use this protocol until official released.  
+See PR(pull requests) [#210][pr210].  
+
+I did 
+
+1. fork django-background-tasks
+1. `git remote add upstream https://github.com/arteria/django-background-tasks.git`
+1. `git remote add monarchmoney https://github.com/monarchmoney/django-background-tasks.git`
+1. `git merge monarchmoney/master`
+1. `git push`
+
+And `pip install` from my GitHub repository.
+
+```shell
+$ pip install git+git://github.com/mitsuhisaT/django-background-tasks.git@master#egg=django-background-tasks
+```
 ----
 [atom]: https://atom.io
 [atomide]: https://ide.atom.io
@@ -79,3 +101,5 @@ pip install django-libsass
 [sass]: https://sass-lang.com
 [htus]: https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-python-way/
 [bss]: https://getbootstrap.com/docs/4.3/getting-started/download/#source-files
+[bts]: https://github.com/arteria/django-background-tasks
+[pr210]: https://github.com/arteria/django-background-tasks/pull/210
