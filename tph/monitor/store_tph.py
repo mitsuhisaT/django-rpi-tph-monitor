@@ -3,7 +3,6 @@ Store temperature, pressure and humidity from BME230I2C.
 """
 from datetime import datetime
 import logging
-from django.utils import timezone
 # from .bme280i2c import BME280I2C
 from .bme280i2c_stub import BME280I2C
 from .data_container import BME280dc
@@ -49,7 +48,7 @@ class StoreTph():
                             pressure=self.__bme280dc.p,
                             humidity=self.__bme280dc.h,
                             )
-            print(repr(bme280))
+            logger.debug(repr(bme280))
             bme280.save()
             logger.debug('end')
             return bme280.id
