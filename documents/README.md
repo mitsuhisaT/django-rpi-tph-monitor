@@ -93,6 +93,29 @@ And `pip install` from my GitHub repository.
 ```shell
 $ pip install git+git://github.com/mitsuhisaT/django-background-tasks.git@master#egg=django-background-tasks
 ```
+
+#### Registration background tasks and execute
+First run server.
+
+```shell
+$ $ ./manage.py runserver
+```
+
+You have to get another shell(terminal).
+Second registration task.
+
+```shell
+$ curl -X POST http://localhost:8000/monitor/tasks/5/30
+```
+Third run process tasks.
+
+```shell
+$ ./manage.py process_tasks
+```
+
+You can check tasks from your database that default is db.sqlite3.
+See background_task, background_task_completed_tasks, or monitor_bme280 tables.
+
 ----
 [atom]: https://atom.io
 [atomide]: https://ide.atom.io

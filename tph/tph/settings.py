@@ -106,9 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -134,11 +134,62 @@ STATICFILES_FINDERS = [
 
 # for SASS/SCSS
 # https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-python-way/
+# https://stackoverflow.com/questions/22515611/django-sass-compressor-django-libsass-sasscompiler-command-not-found
+
 COMPRESS_ROOT = os.path.join(BASE_DIR, 'static')
 COMPRESS_PRECOMPILERS = (
     # ('text/x-scss', 'django_libsass.SassCompiler'),
     ('text/x-scss', 'pysassc {infile} {outfile}'),
 )
+
+
+# for Django Background Tasks
+# https://django-background-tasks.readthedocs.io/en/latest/
+
+# MAX_ATTEMPTS = 25
+# MAX_RUN_TIME = 3600
+# BACKGROUND_TASK_RUN_ASYNC = False
+# BACKGROUND_TASK_ASYNC_THREADS = multiprocessing.cpu_count()
+# BACKGROUND_TASK_PRIORITY_ORDERING = 'DESC'
+
+
+# Logging
+# https://docs.djangoproject.com/en/3.0/topics/logging/
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/debug.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 
 # for RPi TPH Monitor

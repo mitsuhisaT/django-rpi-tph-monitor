@@ -1,6 +1,4 @@
-"""
-Store temperature, pressure and humidity from BME230I2C.
-"""
+"""Store temperature, pressure and humidity from BME230I2C."""
 from datetime import datetime
 import logging
 # from .bme280i2c import BME280I2C
