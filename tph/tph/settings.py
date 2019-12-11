@@ -206,3 +206,6 @@ ON_RASPBERRY_PI = False
 # miscs
 
 OWNER = 'ML and AI study group.'
+DATET_FORMAT = 'Y F d'
+TIME_FORMAT = 'H:i:s'
+DATETIME_FORMAT = 'r'

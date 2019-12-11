@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 class BME280dc():
     """Data Container for BME280 model."""
 
-    def __init__(self, t: float, p: float, h: float):
+    def __init__(self, t: float, p: float, h: float, mdt=timezone.now()):
         """
         Constractor.
 
@@ -20,7 +20,7 @@ class BME280dc():
         self.t = t
         self.p = p
         self.h = h
-        self.__mdt = timezone.now()
+        self.mdt = mdt
 
     @property
     def t(self):
@@ -56,3 +56,8 @@ class BME280dc():
     def mdt(self):
         """Get measured datetime."""
         return self.__mdt
+
+    @mdt.setter
+    def mdt(self, mdt=timezone.now()):
+        """Set measured datetime."""
+        self.__mdt = mdt
