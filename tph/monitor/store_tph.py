@@ -1,10 +1,15 @@
 """Store temperature, pressure and humidity from BME230I2C."""
 from datetime import datetime
+from importlib import import_module
 import logging
-# from .bme280i2c import BME280I2C
-from .bme280i2c_stub import BME280I2C
+from django.conf import settings as ts
 from .data_container import BME280dc
 from .models import BME280
+if ts.ON_RASPBERRY_PI:
+    module_object = import_module('monitor.bme280i2c')
+else:
+    module_object = import_module('monitor.bme280i2c_stub')
+BME280I2C = getattr(module_object, 'BME280I2C')
 
 logger = logging.getLogger(__name__)
 

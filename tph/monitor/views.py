@@ -4,8 +4,10 @@ Views contoroller.
 @date 27 November 2019
 @author mitsuhisaT <asihustim@gmail.com>
 """
+from importlib import import_module
 import logging
 from datetime import timedelta
+from django.conf import settings as ts
 from django.http import JsonResponse, HttpResponse, Http404
 from django.shortcuts import render
 from django.utils import timezone
@@ -13,11 +15,13 @@ from django.views.decorators.csrf import csrf_exempt
 # from rest_framework import status
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
-# from .bme280i2c import BME280I2C
 from .data_container import BME280dc
-from .bme280i2c_stub import BME280I2C
 from .store_tph_bg import bgStoreTph
-import tph.settings as ts
+if ts.ON_RASPBERRY_PI:
+    module_object = import_module('monitor.bme280i2c')
+else:
+    module_object = import_module('monitor.bme280i2c_stub')
+BME280I2C = getattr(module_object, 'BME280I2C')
 
 logger = logging.getLogger(__name__)
 

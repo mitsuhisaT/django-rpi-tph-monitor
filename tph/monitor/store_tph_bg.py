@@ -1,10 +1,10 @@
 """Background store temperature, pressure and humidity from BME230I2C."""
 from background_task import background
-from datetime import timedelta
-from django.utils import timezone
 import logging
+from datetime import timedelta
+from django.conf import settings as ts
+from django.utils import timezone
 from .store_tph import StoreTph
-import tph.settings as ts
 
 
 logger = logging.getLogger(__name__)
