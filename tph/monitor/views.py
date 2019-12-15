@@ -15,8 +15,11 @@ from django.views.decorators.csrf import csrf_exempt
 # from rest_framework import status
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
-from .data_container import BME280dc
-from .store_tph_bg import bgStoreTph
+from rest_framework import viewsets
+from monitor.data_container import BME280dc
+from monitor.store_tph_bg import bgStoreTph
+from monitor.models import BME280
+from monitor.serializers import BME280Serializer
 if ts.ON_RASPBERRY_PI:
     module_object = import_module('monitor.bme280i2c')
 else:
@@ -79,3 +82,9 @@ def tasks(request, rpt, untl):
 def bsstest(request, bss_id):
     response = "You're in Bootstrap Sass test page: bssid %s."
     HttpResponse(response % bss_id)
+
+
+class BME280ViewSet(viewsets.ModelViewSet):
+    """API endpoint that allows BME280 to be viewed and edit."""
+    queryset = BME280.objects.all().order_by('-measure_datetime')
+    serializer_class = BME280Serializer

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,16 @@ COMPRESS_PRECOMPILERS = (
     # ('text/x-scss', 'django_libsass.SassCompiler'),
     ('text/x-scss', 'pysassc {infile} {outfile}'),
 )
+
+
+# for Django Rest Framework
+# https://www.django-rest-framework.org
+# https://www.django-rest-framework.org/tutorial/quickstart/
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 
 # for Django Background Tasks
