@@ -77,14 +77,8 @@ def tasks(request, rpt, untl):
         return JsonResponse({'status': False}, status=405)
 
 
-# @api_view(['GET'])
-@csrf_exempt
-def bsstest(request, bss_id):
-    response = "You're in Bootstrap Sass test page: bssid %s."
-    HttpResponse(response % bss_id)
-
-
 class BME280ViewSet(viewsets.ModelViewSet):
     """API endpoint that allows BME280 to be viewed and edit."""
+
     queryset = BME280.objects.all().order_by('-measure_datetime')
     serializer_class = BME280Serializer
