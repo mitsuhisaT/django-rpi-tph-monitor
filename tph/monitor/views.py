@@ -47,13 +47,32 @@ def show(request):
             raise Http404("Can't get datas from BME280")
         logger.debug('end')
         bme280dcs.append(BME280dc(t=bme280i2c.T, p=bme280i2c.P, h=bme280i2c.H))
-    return render(request, 'monitor/show.html', {
+    context = {
         'site_title': 'TPH monitor',
         'title': 'Show current environment:pressure, humidity and temperature',
         'bme280dcs': bme280dcs,
         'year': 2019,
         'owner': ts.OWNER,
-    })
+    }
+    # https://docs.djangoproject.com/en/3.0/topics/http/shortcuts/#render
+    return render(request, 'monitor/show.html', context)
+
+
+@csrf_exempt
+def showlastmonth(request):
+    """Show current environment pressure, humidity and temperature."""
+    logger.debug('start')
+    lm = (timezone.now().month - 1)
+    bme280s = BME280.objects.filter(measure_datetime__month=lm)
+    context = {
+        'site_title': 'TPH monitor',
+        'title': 'Show current environment:pressure, humidity and temperature',
+        'bme280s': bme280s,
+        'year': 2019,
+        'owner': ts.OWNER,
+    }
+    # https://docs.djangoproject.com/en/3.0/topics/http/shortcuts/#render
+    return render(request, 'monitor/show.html', context)
 
 
 # @api_view(['POST'])

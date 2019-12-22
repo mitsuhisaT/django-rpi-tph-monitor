@@ -10,13 +10,13 @@ from monitor.data_container import BME280dc
 from monitor.models import BME280
 from monitor.store_tph import StoreTph
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 class BME280ModelTests(TestCase):
     """Test BME280Model."""
 
-    def test_save_BM280(self):
+    def test_save_BME280(self):
         """Save data."""
         w_bme280 = BME280(
             temperature=0.0,
@@ -27,6 +27,32 @@ class BME280ModelTests(TestCase):
         id = w_bme280.id
         r_bme280s = BME280.objects.filter(id=id).values()
         self.assertEqual(r_bme280s[0]['temperature'], 0.0)
+
+    def test_get_lastmonth_BME280(self):
+        """Get last month data."""
+        w_bme280 = BME280(
+            temperature=15.0,
+            pressure=0.0,
+            humidity=0.0,
+            measure_datetime=datetime.datetime(2019, 12, 15, 12, 34, 56)
+        )
+        w_bme280.save()
+        w_bme280 = BME280(
+            temperature=15.0,
+            pressure=0.0,
+            humidity=0.0,
+            measure_datetime=datetime.datetime(2019, 11, 16, 12, 34, 56)
+        )
+        w_bme280.save()
+        year = timezone.now().year
+        tMonth = timezone.now().month
+        lMonth = (tMonth - 1) if tMonth != 1 else 12
+        lMonth1st = datetime.date(year, lMonth, 1)
+        tMonth1st = datetime.date(year, tMonth, 1)
+
+        bme280s = BME280.objects.filter(measure_datetime__range=(lMonth1st,
+                                                                 tMonth1st))
+        self.assertEqual(bme280s[0].temperature, 15.0)
 
 
 class BME280dcTests(TestCase):
