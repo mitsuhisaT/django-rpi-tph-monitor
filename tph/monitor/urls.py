@@ -14,6 +14,9 @@ router.register(r'BME280', views.BME280ViewSet)
 urlpatterns = [
     path('', views.index, name='index'),
     path('show', views.show, name='show'),
+    path('show/<int:year>/<int:month>', views.showmonth, name='showmonth'),
+    path('show/<int:year>/<int:month>/<int:day>',
+         views.showday, name='showday'),
     path('showlastmonth', views.showlastmonth, name='showlastmonth'),
     path('tasks/<int:rpt>/<int:untl>', views.tasks, name='tasks'),
     path('rest/', include(router.urls)),

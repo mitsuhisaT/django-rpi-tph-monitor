@@ -18,7 +18,7 @@ class BME280(models.Model):
     pressure = models.FloatField()
     humidity = models.FloatField()
     temperature = models.FloatField()
-    measure_datetime = models.DateTimeField(auto_now_add=True)
+    measure_date = models.DateTimeField(auto_now_add=True)
 
     def ___str___(self):
         """About this BME2880 Model."""

@@ -67,7 +67,7 @@ class StoreTph():
             temperature=bme280dc.t,
             pressure=bme280dc.p,
             humidity=bme280dc.h,
-            measure_datetime=bme280dc.mdt,
+            measure_date=bme280dc.mdt,
         ).save()
         logger.debug('end')
 
@@ -86,6 +86,6 @@ class StoreTph():
         logger.debug('start')
         logger.debug('end')
         return BME280.objects.filter(
-                                     measure_datetime__gte=bdt,
-                                     measure_datetime__lte=edt,
+                                     measure_date__gte=bdt,
+                                     measure_date__lte=edt,
                                     ).values()

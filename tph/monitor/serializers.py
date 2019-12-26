@@ -12,4 +12,4 @@ class BME280Serializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BME280
         fields = ['id', 'pressure', 'humidity', 'temperature',
-                  'measure_datetime']
+                  'measure_date']

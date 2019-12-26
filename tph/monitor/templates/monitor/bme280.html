@@ -15,10 +15,10 @@
   <tbody>
   {% for bme280 in bme280s %}
     <tr>
-      <th scope="row">{{ bme280.measure_datetime|date:"SHORT_DATE_FORMAT" }}&nbsp;{{ bme280['measure_datetime']|time:"H:i:s e"}}</th>
-      <td>{{ bme280['pressure']|floatformat:2 }}</td>
-      <td>{{ bme280['humidity']|floatformat:2 }}</td>
-      <td>{{ bme280['temperature']|floatformat:2 }}</td>
+      <th scope="row">{{ bme280.measure_date|date:"SHORT_DATE_FORMAT" }}&nbsp;{{ bme280.measure_date|time:"H:i:s e"}}</th>
+      <td>{{ bme280.pressure|floatformat:2 }}</td>
+      <td>{{ bme280.humidity|floatformat:2 }}</td>
+      <td>{{ bme280.temperature|floatformat:2 }}</td>
     </tr>
   {% endfor %}
   </tbody>

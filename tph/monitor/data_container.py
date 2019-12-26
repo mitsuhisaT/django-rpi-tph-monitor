@@ -16,6 +16,7 @@ class BME280dc():
             t (float): temperature 気温
             p (float): pressure 気圧
             h (float): humidity 湿度
+            mdt (datetime): measure datetime 測定日時
         """
         self.t = t
         self.p = p

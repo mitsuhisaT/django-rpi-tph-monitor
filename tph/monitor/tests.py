@@ -1,5 +1,5 @@
 """Test."""
-import datetime
+from datetime import date, datetime, timedelta
 import logging
 import time
 from django.conf import settings as ts
@@ -25,35 +25,54 @@ class BME280ModelTests(TestCase):
         )
         w_bme280.save()
         id = w_bme280.id
-        r_bme280s = BME280.objects.filter(id=id).values()
-        self.assertEqual(r_bme280s[0]['temperature'], 0.0)
+        r_bme280 = BME280.objects.get(id=id)
+        self.assertEqual(r_bme280.temperature, 0.0)
 
     def test_get_lastmonth_BME280(self):
         """Get last month data."""
+        tMonth = date.today().replace(day=1)
+        lMonth = tMonth - timedelta(days=1)
+
         w_bme280 = BME280(
             temperature=15.0,
             pressure=0.0,
             humidity=0.0,
-            measure_datetime=datetime.datetime(2019, 12, 15, 12, 34, 56)
         )
         w_bme280.save()
+        w_bme280.measure_date = datetime(2018, tMonth.month, 15, 12, 34, 56)
+        w_bme280.save()
+
         w_bme280 = BME280(
             temperature=15.0,
             pressure=0.0,
             humidity=0.0,
-            measure_datetime=datetime.datetime(2019, 11, 16, 12, 34, 56)
         )
         w_bme280.save()
-        year = timezone.now().year
-        tMonth = timezone.now().month
-        lMonth = (tMonth - 1) if tMonth != 1 else 12
-        lMonth1st = datetime.date(year, lMonth, 1)
-        tMonth1st = datetime.date(year, tMonth, 1)
+        w_bme280.measure_date = datetime(2019, tMonth.month, 15, 12, 34, 56)
+        w_bme280.save()
 
-        bme280s = BME280.objects.filter(measure_datetime__range=(lMonth1st,
-                                                                 tMonth1st))
-        self.assertEqual(bme280s[0].temperature, 15.0)
+        w_bme280 = BME280(
+            temperature=15.0,
+            pressure=0.0,
+            humidity=0.0,
+        )
+        w_bme280.save()
 
+        w_bme280 = BME280(
+            temperature=14.9,
+            pressure=0.0,
+            humidity=0.0,
+        )
+        w_bme280.save()
+        w_bme280.measure_date = datetime(2019, lMonth.month, 15, 12, 34, 56)
+        w_bme280.save()
+        # time.sleep(5)
+
+        # https://docs.djangoproject.com/en/3.0/ref/databases/#sqlite-notes
+        tDate = date(2019, 11, 15)
+        bme280s = BME280.objects.filter(measure_date__month=lMonth.month)
+        # bme280s = BME280.objects.all()
+        self.assertEqual(bme280s[0].temperature, 14.9)
 
 class BME280dcTests(TestCase):
     """Teest data container BME280dc."""
@@ -88,7 +107,7 @@ class BME280dcTests(TestCase):
         pressure = 1025
         humidity = 52
         w_bme280dc = BME280dc(t=temperature, p=pressure, h=humidity)
-        self.assertIsInstance(w_bme280dc.mdt, datetime.datetime)
+        self.assertIsInstance(w_bme280dc.mdt, datetime)
 
     def test_set_BME280dc_t(self):
         """Set datas."""
@@ -135,7 +154,7 @@ class StoreTphTests(TestCase):
             storeTph = StoreTph(ts.BME280CH1_ADDR)
             storeTph.save()
             time.sleep(1)
-        bdt = startdt + datetime.timedelta(seconds=1)
-        edt = startdt + datetime.timedelta(seconds=4)
+        bdt = startdt + timedelta(seconds=1)
+        edt = startdt + timedelta(seconds=4)
         bme280s = storeTph.betweenDatetime(bdt=bdt, edt=edt)
         self.assertEqual(len(bme280s), 3)
