@@ -6,15 +6,14 @@ Views contoroller.
 """
 from importlib import import_module
 import logging
+import deprecation
 from datetime import timedelta
 from django.conf import settings as ts
 from django.http import JsonResponse, HttpResponse, Http404
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-# from rest_framework import status
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
+from django.views.generic import ListView
 from rest_framework import viewsets
 from monitor.data_container import BME280dc
 from monitor.store_tph_bg import bgStoreTph
@@ -65,7 +64,7 @@ def __response(request, bme280s, title):
     context = {
         'site_title': 'TPH monitor',
         'title': title,
-        'bme280s': bme280s,
+        'page_obj': bme280s,
         'year': 2019,
         'owner': ts.OWNER,
     }
@@ -77,24 +76,31 @@ def __response(request, bme280s, title):
 def showlastmonth(request):
     """Show last month environment pressure, humidity and temperature."""
     logger.debug('start')
-    lm = (timezone.now().month - 1)
-    bme280s = BME280.objects.filter(measure_date__month=lm)
+    tMonth = timezone.now().replace(day=1)
+    lMonth = tMonth - timedelta(days=1)
+    bme280s = BME280.objects.filter(measure_date__month=lMonth.month)
     title = 'Show last month pressure, humidity and temperature'
     return __response(request, bme280s, title)
 
 
 @csrf_exempt
+@deprecation.deprecated(deprecated_in="1.0", removed_in="2.0",
+                        # current_version=__version__,
+                        details="Use the Bme280List class instead")
 def showmonth(request, year: int, month: int):
     """Show year/month environment pressure, humidity and temperature."""
     logger.debug(f'start, year: {year}, month: {month}')
     bme280s = BME280.objects.filter(measure_date__year=year,
-                                    measure_date__month=month
-                                   )
+                                    measure_date__month=month,
+                                    )
     title = f'Show {year}/{month} pressure, humidity and temperature'
     return __response(request, bme280s, title)
 
 
 @csrf_exempt
+@deprecation.deprecated(deprecated_in="1.0", removed_in="2.0",
+                        # current_version=__version__,
+                        details="Use the Bme280List class instead")
 def showday(request, year: int, month: int, day: int):
     """Show year/month/day environment pressure, humidity and temperature."""
     logger.debug(f'start, year: {year}, month: {month}, day: {day}')
@@ -125,6 +131,47 @@ def tasks(request, rpt, untl):
     else:
         logger.debug('end, status: 405')
         return JsonResponse({'status': False}, status=405)
+
+
+class Bme280List(ListView):
+    """For list view."""
+
+    model = BME280
+    paginate_by = ts.PAGE_SIZE
+    template_name = 'monitor/bme280.html'
+    title = f'Show pressure, humidity and temperature'
+
+    def get_context_data(self, **kwargs):
+        """Get context data."""
+        context = super().get_context_data(**kwargs)
+        context['site_title'] = 'TPH monitor'
+        context['title'] = self.title
+        context['year'] = '2019-2020'
+        context['owner'] = ts.OWNER
+        return context
+
+    def get_queryset(self):
+        """Year, month, day."""
+        if 'year' in self.kwargs:
+            year = self.kwargs['year']
+            if 'month' in self.kwargs:
+                month = self.kwargs['month']
+                if 'day' in self.kwargs:
+                    day = self.kwargs['day']
+                    self.title = f'Show {year}/{month}/{day} pressure, humidity and temperature'
+                    return BME280.objects.filter(measure_date__year=year,
+                                                 measure_date__month=month,
+                                                 measure_date__day=day,
+                                                )
+                else:
+                    self.title = f'Show {year}/{month} pressure, humidity and temperature'
+                    return BME280.objects.filter(measure_date__year=year,
+                                                 measure_date__month=month,
+                                                )
+            else:
+                self.title = f'Show {year} pressure, humidity and temperature'
+                return BME280.objects.filter(measure_date__year=year)
+        return BME280.objects.all()
 
 
 class BME280ViewSet(viewsets.ModelViewSet):

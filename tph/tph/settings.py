@@ -144,13 +144,15 @@ COMPRESS_PRECOMPILERS = (
 )
 
 
+PAGE_SIZE = 10
+
 # for Django Rest Framework
 # https://www.django-rest-framework.org
 # https://www.django-rest-framework.org/tutorial/quickstart/
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': PAGE_SIZE,
 }
 
 
@@ -187,21 +189,22 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'logs/debug.log',
-            'formatter': 'verbose',
-        },
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': 'logs/debug.log',
+        #     'formatter': 'verbose',
+        # },
     },
     'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'WARNING',
-            'propagate': True,
-        },
+        # 'django': {
+        #     'handlers': ['file'],
+        #     'level': 'WARNING',
+        #     'propagate': True,
+        # },
         '': {
-            'handlers': ['console', 'file'],
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
         },

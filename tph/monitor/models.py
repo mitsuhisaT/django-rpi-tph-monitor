@@ -20,6 +20,9 @@ class BME280(models.Model):
     temperature = models.FloatField()
     measure_date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['measure_date']
+
     def ___str___(self):
         """About this BME2880 Model."""
         return 'Store pressure, humidity and temperature.'

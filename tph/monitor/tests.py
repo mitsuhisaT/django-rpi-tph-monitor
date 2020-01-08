@@ -3,7 +3,7 @@ from datetime import date, datetime, timedelta
 import logging
 import time
 from django.conf import settings as ts
-# from django.utils import timezone
+from django.utils import timezone
 from django.test import TestCase
 from django.utils import timezone
 from monitor.data_container import BME280dc
@@ -30,8 +30,10 @@ class BME280ModelTests(TestCase):
 
     def test_get_lastmonth_BME280(self):
         """Get last month data."""
-        tMonth = date.today().replace(day=1)
+        tMonth = timezone.now().replace(day=1)
         lMonth = tMonth - timedelta(days=1)
+        tYear = tMonth.year
+        lYear = tYear - 1
 
         w_bme280 = BME280(
             temperature=15.0,
@@ -39,7 +41,7 @@ class BME280ModelTests(TestCase):
             humidity=0.0,
         )
         w_bme280.save()
-        w_bme280.measure_date = datetime(2018, tMonth.month, 15, 12, 34, 56)
+        w_bme280.measure_date = datetime(lYear, tMonth.month, 15, 12, 34, 56)
         w_bme280.save()
 
         w_bme280 = BME280(
@@ -48,7 +50,7 @@ class BME280ModelTests(TestCase):
             humidity=0.0,
         )
         w_bme280.save()
-        w_bme280.measure_date = datetime(2019, tMonth.month, 15, 12, 34, 56)
+        w_bme280.measure_date = datetime(tYear, tMonth.month, 15, 12, 34, 56)
         w_bme280.save()
 
         w_bme280 = BME280(
@@ -64,14 +66,12 @@ class BME280ModelTests(TestCase):
             humidity=0.0,
         )
         w_bme280.save()
-        w_bme280.measure_date = datetime(2019, lMonth.month, 15, 12, 34, 56)
+        w_bme280.measure_date = datetime(tYear, lMonth.month, 15, 12, 34, 56)
         w_bme280.save()
         # time.sleep(5)
 
         # https://docs.djangoproject.com/en/3.0/ref/databases/#sqlite-notes
-        tDate = date(2019, 11, 15)
         bme280s = BME280.objects.filter(measure_date__month=lMonth.month)
-        # bme280s = BME280.objects.all()
         self.assertEqual(bme280s[0].temperature, 14.9)
 
 class BME280dcTests(TestCase):
