@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    # 'dpd_static_support',
     'rest_framework',
 ]
 
@@ -51,7 +53,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
+
+# https://docs.djangoproject.com/en/3.0/ref/clickjacking/
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ROOT_URLCONF = 'tph.urls'
 
@@ -73,6 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tph.wsgi.application'
 
+ASGI_APPLICATION = 'tph.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -118,6 +126,25 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Plotly dash settings
+
+PLOTLY_DASH = {
+    "ws_route": "ws/channel",
+
+    "insert_demo_migrations": True,  # Insert model instances used by the demo
+
+    "http_poke_enabled": True, # Flag controlling availability of direct-to-messaging http endpoint
+
+    "view_decorator": None, # Specify a function to be used to wrap each of the dpd view functions
+
+    "cache_arguments": True, # True for cache, False for session-based argument propagation
+
+    # "serve_locally": True, # True to serve assets locally, False to use their unadulterated urls (eg a CDN)
+
+    # "stateless_loader": "demo.scaffold.stateless_app_loader",
+    }
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -130,6 +157,22 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
+# Plotly components containing static content that should
+# be handled by the Django staticfiles infrastructure
+
+PLOTLY_COMPONENTS = [
+    'dash_core_components',
+    'dash_html_components',
+    # 'dash_bootstrap_components',
+    'dash_renderer',
+    'dpd_components',
+    # 'dpd_static_support',
 ]
 
 
@@ -174,7 +217,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'format': '[{asctime}] {levelname} {module}.{funcName} {message}',
             'style': '{',
         },
         'simple': {
@@ -226,6 +269,7 @@ ON_RASPBERRY_PI = False
 # miscs
 
 OWNER = 'ML and AI study group.'
+COPYRIGHT_YEAR = '2019-2020'
 DATET_FORMAT = 'Y F d'
 TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'r'
