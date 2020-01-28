@@ -50,7 +50,7 @@ def show(request):
         'site_title': 'TPH monitor',
         'title': 'Show current environment:pressure, humidity and temperature',
         'bme280dcs': bme280dcs,
-        'year': 2019,
+        'year': ts.COPYRIGHT_YEAR,
         'owner': ts.OWNER,
     }
     # https://docs.djangoproject.com/en/3.0/topics/http/shortcuts/#render
@@ -65,7 +65,7 @@ def __response(request, bme280s, title):
         'site_title': 'TPH monitor',
         'title': title,
         'page_obj': bme280s,
-        'year': 2019,
+        'year': ts.COPYRIGHT_YEAR,
         'owner': ts.OWNER,
     }
     # https://docs.djangoproject.com/en/3.0/topics/http/shortcuts/#render
@@ -133,20 +133,43 @@ def tasks(request, rpt, untl):
         return JsonResponse({'status': False}, status=405)
 
 
+def tph_chart_view(request, template_name="monitor/chart.html", **kwargs):
+    """Create example view.
+
+    that inserts content into the dash context passed to the dash application.
+    """
+    logger.debug('start')
+
+    context = {
+        'site_title': 'TPH monitor',
+        'title': 'TPH chart via Plotly Dash for Django.',
+        'year': ts.COPYRIGHT_YEAR,
+        'owner': ts.OWNER,
+    }
+
+    # create some context to send over to Dash:
+    dash_context = request.session.get("django_plotly_dash", dict())
+    dash_context['django_to_dash_context'] = "I am Dash receiving context from Django"
+    request.session['django_plotly_dash'] = dash_context
+
+    logger.debug('end')
+    return render(request, template_name=template_name, context=context)
+
+
 class Bme280List(ListView):
     """For list view."""
 
     model = BME280
     paginate_by = ts.PAGE_SIZE
     template_name = 'monitor/bme280.html'
-    title = f'Show pressure, humidity and temperature'
+    title = 'all'
 
     def get_context_data(self, **kwargs):
         """Get context data."""
         context = super().get_context_data(**kwargs)
         context['site_title'] = 'TPH monitor'
         context['title'] = self.title
-        context['year'] = '2019-2020'
+        context['year'] = ts.COPYRIGHT_YEAR
         context['owner'] = ts.OWNER
         return context
 
@@ -158,19 +181,23 @@ class Bme280List(ListView):
                 month = self.kwargs['month']
                 if 'day' in self.kwargs:
                     day = self.kwargs['day']
-                    self.title = f'Show {year}/{month}/{day} pressure, humidity and temperature'
+                    self.title = f'{year}/{month}/{day}'
+                    logger.debug(f'{self.title}')
                     return BME280.objects.filter(measure_date__year=year,
                                                  measure_date__month=month,
                                                  measure_date__day=day,
-                                                )
+                                                 )
                 else:
-                    self.title = f'Show {year}/{month} pressure, humidity and temperature'
+                    self.title = f'{year}/{month}'
+                    logger.debug(f'{self.title}')
                     return BME280.objects.filter(measure_date__year=year,
                                                  measure_date__month=month,
-                                                )
+                                                 )
             else:
-                self.title = f'Show {year} pressure, humidity and temperature'
+                self.title = f'{year}'
+                logger.debug(f'{self.title}')
                 return BME280.objects.filter(measure_date__year=year)
+        logger.debug(f'{self.title}')
         return BME280.objects.all()
 
 
