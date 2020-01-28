@@ -11,6 +11,7 @@ django-bootstrap4>=1.0.1
 -e git://github.com/arteria/django-background-tasks.git@master#egg=django-background-tasks
 -e git://github.com/mitsuhisaT/django-compressor.git@six1.13#egg=django_compressor
 django-filter>=2.2.0
+django_plotly_dash>=1.1.4
 djangorestframework>=3.10.3
 drf-yasg>=1.17.0
 idna>=2.8
