@@ -1,4 +1,9 @@
-"""Draw TPH graph."""
+"""
+Draw TPH graph.
+
+@date 30 January 2020
+@author mitsuhisaT <asihustim@gmail.com>
+"""
 
 import dash
 import dash_core_components as dcc
@@ -12,59 +17,36 @@ from django_plotly_dash import DjangoDash
 
 logger = logging.getLogger(__name__)
 
-logger.debug('start')
+
 chart = DjangoDash(name='tph_chart',
                    serve_locally=True,
-                   app_name="DPD demo application"
+                   app_name="TPH chart application"
                    )
 
-
-def chart_layout():
-    """
-    # Below is a random Dash app.
-    # I encountered no major problems in using Dash this way.
-    # I did encounter problems but it was because
-    # I was using e.g. Bootstrap inconsistenyly across the dash layout.
-    # Staying consistent worked fine for me.
-    """
-
-    return html.Div(
-        id='main',
-        children=[
-            html.Div([
-                dcc.Dropdown(
-                    id='my-dropdown1',
-                    options=[{'label': 'New York City', 'value': 'NYC'},
-                             {'label': 'Montreal', 'value': 'MTL'},
-                             {'label': 'San Francisco', 'value': 'SF'}
-                             ],
-                    value='NYC',
-                    className='col-md-12',
-                    ),
-                html.Div(id='test-output-div')
-                ],
-                ),
+chart.layout = html.Div(
+    id='main',
+    children=[
+        html.Div([
             dcc.Dropdown(
-                id='my-dropdown2',
-                options=[
-                    {'label': 'Oranges', 'value': 'Oranges'},
-                    {'label': 'Plums', 'value': 'Plums'},
-                    {'label': 'Peaches', 'value': 'Peaches'}
-                ],
-                value='Oranges',
+                id='select-item',
+                options=[{'label': 'all', 'value': 'A'},
+                         {'label': 'pressure', 'value': 'P'},
+                         {'label': 'humidity', 'value': 'H'},
+                         {'label': 'temperature', 'value': 'T'}
+                         ],
+                value='A',
                 className='col-md-12',
-            ),
-            html.Div(id='test-output-div2')
-        ])
-    logger.debug('end')
-
-
-chart.layout = chart_layout
+                ),
+            html.Div(id='tph-chart-div')
+            ],
+        ),
+    ]
+)
 
 
 @chart.callback(
-    Output('test-output-div', 'children'),
-    [Input('my-dropdown1', 'value')])
+    Output('tph-chart-div', 'children'),
+    [Input('select-item', 'value')])
 def callback_test(*args, **kwargs):  # pylint: disable=unused-argument
     """Call back to generate test data on each change of the dropdown."""
     logger.debug('start')
@@ -98,20 +80,4 @@ def callback_test(*args, **kwargs):  # pylint: disable=unused-argument
     children = [line_graph]
 
     logger.debug('end')
-    return children
-
-
-@chart.callback(
-    Output('test-output-div2', 'children'),
-    [Input('my-dropdown2', 'value')])
-def callback_test2(*args, **kwargs):
-    """Call back to exercise session functionality."""
-    print(args)
-    print(kwargs)
-
-    children = [
-        html.Div(["You have selected %s." % args[0]]),
-        # html.Div(["The session context message is '%s'" %
-        #          kwargs['session_state']['django_to_dash_context']])
-                 ]
     return children
