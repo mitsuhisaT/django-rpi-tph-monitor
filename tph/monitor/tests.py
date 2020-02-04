@@ -5,7 +5,6 @@ import time
 from django.conf import settings as ts
 from django.utils import timezone
 from django.test import TestCase
-from django.utils import timezone
 from monitor.data_container import BME280dc
 from monitor.models import BME280
 from monitor.store_tph import StoreTph

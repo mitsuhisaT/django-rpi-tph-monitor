@@ -112,12 +112,12 @@ def showday(request, year: int, month: int, day: int):
     return __response(request, bme280s, title)
 
 
-# @api_view(['POST'])
+# @api_view(['POST', 'GET'])
 @csrf_exempt
 def tasks(request, rpt, untl):
     """Register background tasks."""
     logger.debug('start')
-    if request.method == 'POST':
+    if request.method == 'GET':
         end_datetime = timezone.now() + timedelta(seconds=untl)
         bgStoreTph(repeat=rpt,
                    repeat_until=end_datetime)
