@@ -83,7 +83,7 @@ def tph_chart_div(*args, **kwargs):  # pylint: disable=unused-argument
 
     fig.update_layout(
         title_text='Stored temperature, pressure and humidity from BME280',
-        width=1080,
+        width=1050,
         height=600,
         xaxis={
             'domain': [0, 0.9],
