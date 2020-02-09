@@ -15,7 +15,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
-from plotly.subplots import make_subplots
+# from plotly.subplots import make_subplots
 from monitor.models import BME280
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ chart.layout = html.Div(
             dcc.DatePickerRange(
                 id='date-picker-range',
                 min_date_allowed=datetime(2019, 10, 1),
-                max_date_allowed=datetime.now(),
+                max_date_allowed=datetime.now() + timedelta(days=1),
                 start_date=datetime.now().replace(
                     hour=0, minute=0, second=0, microsecond=0)
                 - timedelta(days=7),
@@ -42,17 +42,6 @@ chart.layout = html.Div(
             ),
         ),
         html.Div(id='tph-chart-div'),
-        # html.Div(
-        #     dcc.Checklist(
-        #         id='select-item',
-        #         options=[{'label': 'pressure', 'value': 'P'},
-        #                  {'label': 'humidity', 'value': 'H'},
-        #                  {'label': 'temperature', 'value': 'T'}
-        #                  ],
-        #         value=['T', 'H', 'P'],
-        #         labelStyle=['display', 'inline-block']
-        #     ),
-        # ),
     ],
 )
 

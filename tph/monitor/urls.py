@@ -4,7 +4,7 @@ Urls definitions.
 @date 27 November 2019
 @author mitsuhisaT <asihustim@gmail.com>
 """
-from django.conf.urls import url
+# from django.conf.urls import url
 from django.urls import include, path
 from rest_framework import routers
 # from monitor import views
