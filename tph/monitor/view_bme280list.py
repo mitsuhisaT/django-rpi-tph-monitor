@@ -4,12 +4,8 @@ Views contoroller.
 @date 30 January 2020
 @author mitsuhisaT <asihustim@gmail.com>
 """
-from importlib import import_module
 import logging
-from datetime import timedelta
 from django.conf import settings as ts
-from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 from monitor.models import BME280
 
