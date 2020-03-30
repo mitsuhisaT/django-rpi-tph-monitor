@@ -245,6 +245,14 @@ LOGGING = {
         #     'level': 'WARNING',
         #     'propagate': True,
         # },
+# https://community.plot.ly/t/prevent-post-dash-update-component-http-1-1-messages/11132
+# https://github.com/plotly/dash/issues/270
+        'werkzeug': {
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
         '': {
             # 'handlers': ['console', 'file'],
             'handlers': ['console'],
