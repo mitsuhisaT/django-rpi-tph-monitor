@@ -21,7 +21,7 @@ https://github.com/bivab/smbus-cffi
 import logging
 import time
 from django.conf import settings as ts
-if ts.USE_SMBUS2
+if ts.USE_SMBUS2:
     module_object = import_module('smbus2')
 else:
     module_object = import_module('smbus')
