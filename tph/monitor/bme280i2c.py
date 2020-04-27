@@ -10,13 +10,24 @@ https://www.indoorcorgielec.com/wp-content/uploads/products/rpi-tph-monitor-rev2
 
 For more information to RPi TPH Monitor Rev2.
 https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/
+About smbus2
+https://pypi.org/project/smbus2/
+https://github.com/kplindegaard/smbus2
+
 About smbus(SMBus)
 https://github.com/bivab/smbus-cffi
 """
 
 import logging
-import smbus
 import time
+from django.conf import settings as ts
+if ts.USE_SMBUS2
+    module_object = import_module('smbus2')
+else:
+    module_object = import_module('smbus')
+SMBus = getattr(module_object, 'SMBus')
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +80,7 @@ class BME280I2C:
     def __init__(self, i2c_addr):
         """Define I2C address 0x76 or 0x77."""
         self.i2c_addr = i2c_addr
-        self.i2c = smbus.SMBus(1)
+        self.i2c = SMBus(1)
         self.cal = {}               # Calibration data
         self.adc_T = 0
         self.adc_P = 0
@@ -275,6 +286,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
