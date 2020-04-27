@@ -272,6 +272,7 @@ BME280CH2_ADDR = 0x77
 # for Development on your macOS, Ubuntu or MS-Windows
 
 ON_RASPBERRY_PI = False
+USE_SMBUS2 = True
 
 
 # miscs
