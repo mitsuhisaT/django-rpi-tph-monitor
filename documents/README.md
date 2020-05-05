@@ -62,23 +62,23 @@ cp -r your/bootstrap-4.x.x/scss/* tph/static/bootstrap
 
 Install some Python modules.  
 
-### Django 2.2.x
+### Django 3.0.x
 ```shell
 pip install django_compressor
 pip install django-libsass
 ```
 
 ### Django 3.0.x
-[How to use Bootstrap4 Sass in Django 3.0](for-Django3-upgrade.md)
+~~[How to use Bootstrap4 Sass in Django 3.0](for-Django3-upgrade.md)~~
 
 ### Background tasks
 I selected [Django Background Tasks][bts] for save datas interval.  
-For Django 2.2, `pip install django-background-tasks`.  
-But Django 3.0, not yet support.
+For Django 3.0, `pip install django-background-tasks`.  
+~~But Django 3.0, not yet support.~~
 
 #### Django 3.0
 You must use this protocol until official released.  
-See PR(pull requests) [#210][pr210].  
+See PR(pull requests) [#210][pr210]. This was Closed at Dec 11, 2019.  
 
 I did 
 
