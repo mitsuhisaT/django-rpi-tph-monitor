@@ -10,7 +10,8 @@ Welcome to TPH forecast with Raspberry Pi and TensorFlow.'s documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   prepare
+   gettingstarted
 
 Indices and tables
 ==================
