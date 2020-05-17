@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/django-rpi-tph-monitor/badge/?version=latest
+    :target: https://django-rpi-tph-monitor.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 ######################################
 TPH forecast with Raspberry Pi and AI.
 ######################################
