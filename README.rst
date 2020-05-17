@@ -4,6 +4,8 @@ TPH forecast with Raspberry Pi and AI.
 
 I explain first boot your Raspberry Pi and set up Python environment for developing.
 
+This project is developing now, yet not finish.
+
 *********
 Preparing
 *********
@@ -166,3 +168,11 @@ MS-Windows
 
 
 Let’s begin development “Home automation application”.
+
+*************
+Documentation
+*************
+
+We published documentation on `Read the Docs <https://readthedocs.org>`_.
+
+TPH forecast with Raspberry Pi and AI `documentation <https://django-rpi-tph-monitor.readthedocs.io/en/latest/>`_.

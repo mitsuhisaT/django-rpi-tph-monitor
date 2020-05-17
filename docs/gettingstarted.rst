@@ -5,6 +5,8 @@ Development
 This is setup protocol for developing Home automation with Raspberry PI
 and AI.
 
+Not yet complete this project.
+
 ***************
 Getting started
 ***************
