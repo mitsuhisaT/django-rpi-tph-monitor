@@ -1,27 +1,21 @@
-django-rpi-tph-monitor
-======================
+######################################
+TPH forecast with Raspberry Pi and AI.
+######################################
 
-Home-automation with AI on Raspberry Pi and RIp TPH Monitor.
+I explain first boot your Raspberry Pi and set up Python environment for developing.
 
-about
-=====
+*********
+Preparing
+*********
 
-This is integrated your home automation, control air-conditioner with AI
-and another infrared controlled devices such as television set or
-celling light and so on.
+Please get somethings next list.
 
-prepare
-=======
-
-You must get somethings next list.
-
--  `Raspberry Pi <https://www.raspberrypi.org>`__ 3B, 3B+
--  `RPi TPH Monitor
-   Rev2 <https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/>`__
+-  `Raspberry Pi <https://www.raspberrypi.org>`_ 3B, 3B+
+-  `RPi TPH Monitor Rev2 <https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/>`_
 -  micro SD card, 16GB above(recommended)
 -  USB connected key board
 -  USB connected mouse
--  `Raspbian <https://www.raspbian.org>`__
+-  `Raspbian <https://www.raspbian.org>`_
 -  HDMI cable and display
 
    -  use TV instead of display
@@ -30,138 +24,145 @@ You must get somethings next list.
 
    -  We supported only Python 3.7 upper version.
 
+*******************
 Set up Raspberry Pi
--------------------
+*******************
 
 You must set up your Raspberry Pi.
 
-download newest Raspbian
-~~~~~~~~~~~~~~~~~~~~~~~~
+On your Mac or PC(Linux, MS-Windows), you can install Raspbian to microSD card.
 
-| I recommend using official Raspbian which can download from `Raspberry
-  Pi Downloads <https://www.raspberrypi.org/downloads/>`__.
-| You will choose “Raspbian Buster with desktop and recommended
-  software” or “Raspbian Buster with desktop”.
+Download newest Raspbian
+========================
+
+I recommend using official Raspbian which can download from `Raspberry Pi Downloads <https://www.raspberrypi.org/downloads/>`_.
+
+You will choose “Raspbian Buster with desktop and recommended software” or “Raspbian Buster with desktop”.
 
 Installing operating system image
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=================================
 
-| You must read `installation
-  guide <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>`__
-  for installing operating system image.
-| And download `balenaEtcher <https://www.balena.io/etcher/>`__.
+You must read `installation guide <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>`_ for installing operating system image.
+
+And download `balenaEtcher <https://www.balena.io/etcher/>`_.
 
 macOS
+-----
 
-.. code:: shell
+    If you use Apple Mac, you can install via ``brew``.
 
-   $ brew cask install balenaetcher
+        .. code-block:: shell
+
+            $ brew cask install balenaetcher
 
 First boot
-~~~~~~~~~~
+==========
 
-| Only first boot time, You must connect USB keyboard, USB mouse, and
-  monitor via HDMI.
-| You must set Wi-Fi network and enable SSH via ``raspbian-config``.
+Only first boot time, You must connect USB keyboard, USB mouse, and monitor via HDMI. You must set Wi-Fi network and enable SSH via ``raspbian-config``. Please set fixed IP address, for example ``192.168.0.121/24``.
 
 Test remote connect
-^^^^^^^^^^^^^^^^^^^
+===================
 
-.. code:: shell
+On your Mac or PC, remote connecting test via ``ssh``.
 
-   $ ssh pi@192.168.xxx.xxx
+    .. code-block:: shell
+
+        $ ssh pi@192.168.0.121
 
 Package upgrade
+---------------
 
-.. code:: shell
+    I recommend upgrade your Raspbian.
 
-   $ sudo apt update
-   ...
+        .. code-block:: shell
 
-.. code:: shell
+            $ sudo apt update
+            ...
 
-   $ sudo apt upgrade
+        .. code-block:: shell
 
-Development environment
------------------------
+            $ sudo apt upgrade
 
-| You can development on your Raspberry Pi.
-| I recommend preparing development environment on your Mac or PC.
+*******************************
+Prepare development environment
+*******************************
+
+You can development on your Raspberry Pi.  
+
+I recommend preparing development environment on your Mac or PC.
 
 pyenv and pyenv-virtualenv
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+==========================
 
-| Please install `pyenv <https://github.com/pyenv/pyenv>`__ and
-  `pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__.
-| If you use MS-Windows
-  `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of
-  pyenv.
+Please install 
 
-.. _install-python-via-pyenvpyenv:
+macOS, Linux
+------------
 
-Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    - `pyenv <https://github.com/pyenv/pyenv>`__
+    - `pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__
 
-.. code:: shell
+    Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__
 
-   pyenv install 3.8.0
+        .. code-block:: shell
 
-And setup pyenv-virtualenv
+            $ pyenv install 3.8.0
 
-.. code:: shell
+    And setup pyenv-virtualenv
 
-   pyenv virtualenv 3.8.0 djrpi380
+        .. code-block:: shell
 
-c.f. my home directory.
+            $ pyenv virtualenv 3.8.0 djrpi380
 
-.. code:: shell
+    c.f. my home directory.
 
-   $ pyenv versions
-   * system (set by /Users/mitsu/.pyenv/version)
-     3.7.4
-     3.7.4/envs/djsample374
-     3.8.0
-     3.8.0/envs/djrpi380
-     djrpi380
-     djsample374
-   $ python --version
-   Python 2.7.16
+        .. code-block:: shell
 
-my environment directory.
+            $ pyenv versions
+            * system (set by /Users/mitsu/.pyenv/version)
+             3.7.4
+             3.7.4/envs/djsample374
+             3.8.0
+             3.8.0/envs/djrpi380
+             djrpi380
+             djsample374
 
-.. code:: shell
+        .. code-block:: shell
 
-   $ cd ~/git/hub/django-rpi-tph-monitor
-   $ pyenv local djrpi380
-   $ pyenv versions
-     system
-     3.7.4
-     3.7.4/envs/djsample374
-     3.8.0
-     3.8.0/envs/djrpi380
-   * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
-     djsample374
-   $ python --version
-   Python 3.8.0
+            $ python --version
+            Python 2.7.16
 
-Development Application
-=======================
+    my environment directory.
 
-Let’s development “Home automation application”.
+        .. code-block:: shell
 
-.. _prepare-1:
+            $ cd ~/git/hub/django-rpi-tph-monitor
 
-Prepare
--------
+        .. code-block:: shell
 
-Let’s setup your Python development environment.
+            $ pyenv local djrpi380
 
-Atom IDE
-~~~~~~~~
+        .. code-block:: shell
 
-You need additional installing for Atom
-`ide-python <https://github.com/lgeiger/ide-python>`__.
+            $ pyenv versions
+             system
+             3.7.4
+             3.7.4/envs/djsample374
+             3.8.0
+             3.8.0/envs/djrpi380
+            * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
+             djsample374
 
-.. code:: shell
 
-   python -m pip install 'python-language-server[all]'
+        .. code-block:: shell
+
+            $ python --version
+            Python 3.8.0
+
+MS-Windows
+----------
+
+    If you use MS-Windows, `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv.
+
+
+Let’s begin development “Home automation application”.
