@@ -1,164 +1,168 @@
-# django-rpi-tph-monitor
-Home-automation with AI on Raspberry Pi and RIp TPH Monitor.
+######################################
+TPH forecast with Raspberry Pi and AI.
+######################################
 
-# about
-This is integrated your home automation, control air-conditioner with AI and another infrared controlled devices such as television set or celling light and so on.
+I explain first boot your Raspberry Pi and set up Python environment for developing.
 
-# prepare
-You must get somethings next list.
+*********
+Preparing
+*********
 
-* [Raspberry Pi][raspi] 3B, 3B+
-* [RPi TPH Monitor Rev2][rtm]
-* micro SD card, 16GB above(recommended)
-* USB connected key board
-* USB connected mouse
-* [Raspbian][raspbian]
-* HDMI cable and display
-  * use TV instead of display
-* Python development environment
-  * We supported only Python 3.7 upper version.
+Please get somethings next list.
 
-## Set up Raspberry Pi
+-  `Raspberry Pi <https://www.raspberrypi.org>`_ 3B, 3B+
+-  `RPi TPH Monitor Rev2 <https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/>`_
+-  micro SD card, 16GB above(recommended)
+-  USB connected key board
+-  USB connected mouse
+-  `Raspbian <https://www.raspbian.org>`_
+-  HDMI cable and display
+
+   -  use TV instead of display
+
+-  Python development environment
+
+   -  We supported only Python 3.7 upper version.
+
+*******************
+Set up Raspberry Pi
+*******************
+
 You must set up your Raspberry Pi.
 
-### download newest Raspbian
-I recommend using official Raspbian which can download from [Raspberry Pi Downloads][rpbod].  
-You will choose "Raspbian Buster with desktop and recommended software" or
-"Raspbian Buster with desktop".
+On your Mac or PC(Linux, MS-Windows), you can install Raspbian to microSD card.
 
-### Installing operating system image
-You must read [installation guide][ig] for installing operating system image.  
-And download [balenaEtcher][etcher].
+Download newest Raspbian
+========================
 
-macOS  
-```shell
-$ brew cask install balenaetcher
-```
+I recommend using official Raspbian which can download from `Raspberry Pi Downloads <https://www.raspberrypi.org/downloads/>`_.
 
-### First boot
-Only first boot time, You must connect USB keyboard, USB mouse, and monitor via HDMI.  
-You must set Wi-Fi network and enable SSH via `raspbian-config`.  
+You will choose “Raspbian Buster with desktop and recommended software” or “Raspbian Buster with desktop”.
 
-#### Test remote connect
+Installing operating system image
+=================================
 
-```shell
-$ ssh pi@192.168.xxx.xxx
-```
+You must read `installation guide <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>`_ for installing operating system image.
+
+And download `balenaEtcher <https://www.balena.io/etcher/>`_.
+
+macOS
+-----
+
+    If you use Apple Mac, you can install via ``brew``.
+
+        .. code-block:: shell
+
+            $ brew cask install balenaetcher
+
+First boot
+==========
+
+Only first boot time, You must connect USB keyboard, USB mouse, and monitor via HDMI. You must set Wi-Fi network and enable SSH via ``raspbian-config``. Please set fixed IP address, for example ``192.168.0.121/24``.
+
+Test remote connect
+===================
+
+On your Mac or PC, remote connecting test via ``ssh``.
+
+    .. code-block:: shell
+
+        $ ssh pi@192.168.0.121
 
 Package upgrade
-```shell
-$ sudo apt update
-...
-```
+---------------
 
-```shell
-$ sudo apt upgrade
-```
+    I recommend upgrade your Raspbian.
 
-## Development environment
+        .. code-block:: shell
+
+            $ sudo apt update
+            ...
+
+        .. code-block:: shell
+
+            $ sudo apt upgrade
+
+*******************************
+Prepare development environment
+*******************************
+
 You can development on your Raspberry Pi.  
-I recommend preparing development environment on your Mac or PC.  
 
-### pyenv and pyenv-virtualenv
-Please install [pyenv][pyenv] and [pyenv-virtualenv][pevir].  
-If you use MS-Windows [venv][venv] instead of pyenv.
+I recommend preparing development environment on your Mac or PC.
 
-#### Install Python via [PyEnv][pyenv]
+pyenv and pyenv-virtualenv
+==========================
 
-```shell
-pyenv install 3.8.0
-```
-And setup pyenv-virtualenv
-```shell
-pyenv virtualenv 3.8.0 djrpi380
-```
+Please install 
 
-c.f. my home directory.
-```shell
-$ pyenv versions
-* system (set by /Users/mitsu/.pyenv/version)
-  3.7.4
-  3.7.4/envs/djsample374
-  3.8.0
-  3.8.0/envs/djrpi380
-  djrpi380
-  djsample374
-$ python --version
-Python 2.7.16
-```
+macOS, Linux
+------------
 
-my environment directory.
-```shell
-$ cd ~/git/hub/django-rpi-tph-monitor
-$ pyenv local djrpi380
-$ pyenv versions
-  system
-  3.7.4
-  3.7.4/envs/djsample374
-  3.8.0
-  3.8.0/envs/djrpi380
-* djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
-  djsample374
-$ python --version
-Python 3.8.0
-```
+    - `pyenv <https://github.com/pyenv/pyenv>`__
+    - `pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__
 
-# Development Application
-Let's development "Home automation application".
+    Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__
 
-## Prepare
-Let's setup your Python development environment.
+        .. code-block:: shell
 
-### Python additional modules
+            $ pyenv install 3.8.0
 
-```shell
-pip install Django
-pip install djangorestframework
-pip install markdown
-pip install django-filter
-pip install drf-yasg
-```
+    And setup pyenv-virtualenv
 
-### Atom IDE
-You need additional installing for Atom [ide-python][idepy].
+        .. code-block:: shell
 
-```shell
-python -m pip install 'python-language-server[all]'
-```
+            $ pyenv virtualenv 3.8.0 djrpi380
 
-Or you can use `requirements.txt`.
+    c.f. my home directory.
 
-```
-pip install -r requirements.txt
-```
+        .. code-block:: shell
 
-## First step
-Create your Django Project.
+            $ pyenv versions
+            * system (set by /Users/mitsu/.pyenv/version)
+             3.7.4
+             3.7.4/envs/djsample374
+             3.8.0
+             3.8.0/envs/djrpi380
+             djrpi380
+             djsample374
 
-```shell
-mkdir django-rpi-tph-monitor
-cd django-rpi-tph-monitor
-```
+        .. code-block:: shell
 
-```shell
-django-admin startproject tph
-cd tph
-```
+            $ python --version
+            Python 2.7.16
 
-```shell
-python manage.py runserver
-```
-Access `http://localhost:8000/` on your browser.
-![Django First Boot](assets/images/first-django.png)
+    my environment directory.
 
-----
-[raspi]: https://www.raspberrypi.org
-[rtm]: https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/
-[rpbod]: https://www.raspberrypi.org/downloads/
-[raspbian]: https://www.raspbian.org
-[ig]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
-[etcher]: https://www.balena.io/etcher/
-[pyenv]: https://github.com/pyenv/pyenv
-[pevir]: https://github.com/pyenv/pyenv-virtualenv
-[venv]: https://docs.python.org/3.7/library/venv.html
-[idepy]: https://github.com/lgeiger/ide-python
+        .. code-block:: shell
+
+            $ cd ~/git/hub/django-rpi-tph-monitor
+
+        .. code-block:: shell
+
+            $ pyenv local djrpi380
+
+        .. code-block:: shell
+
+            $ pyenv versions
+             system
+             3.7.4
+             3.7.4/envs/djsample374
+             3.8.0
+             3.8.0/envs/djrpi380
+            * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
+             djsample374
+
+
+        .. code-block:: shell
+
+            $ python --version
+            Python 3.8.0
+
+MS-Windows
+----------
+
+    If you use MS-Windows, `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv.
+
+
+Let’s begin development “Home automation application”.
