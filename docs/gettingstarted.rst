@@ -26,27 +26,28 @@ Python modules
 -  plotly
 -  and so on.
 
+.. code-block:: shell
+
+    $ cd tph
+
 You may install Python packages via `pip`.
 
     .. code-block:: shell
 
-        cd tph
-        pip install -r requirements.txt
+        $ pip install -r requirements.txt
 
 On your development Mac, Ubuntu, or MS-Windows.
 
     .. code-block:: shell
 
-        cd tph
-        pip install -r requirements_dev.txt
+        $ pip install -r requirements_dev.txt
 
 On your target Raspberry Pi
 ---------------------------
 
     .. code-block:: shell
 
-        cd tph
-        pip install -r requirements_rpi.txt
+        $ pip install -r requirements_rpi.txt
 
     And edit your tph/tph/settings.py
 
@@ -71,14 +72,14 @@ make
 
     .. code-block:: shell
 
-        Python manage.py startapp monitor
+        $ Python manage.py startapp monitor
 
 Set up your data base
 =====================
 
     .. code-block:: shell
 
-        Python manage.py migrate
+        $ Python manage.py migrate
 
     .. code-block:: shell
 
@@ -116,7 +117,7 @@ Using SCSS/SASS
 
     .. code-block:: shell
 
-        cp -r your/bootstrap-4.x.x/scss/* tph/static/bootstrap
+        $ cp -r your/bootstrap-4.x.x/scss/* tph/static/bootstrap
 
 Install some Python modules.
 
@@ -193,7 +194,7 @@ This project's documents are making with `SPHINX <https://www.sphinx-doc.org/en/
 
     .. code-block:: shell
     
-        pip install --upgrade sphinx
+        $ pip install --upgrade sphinx
 
 Additional packages.
 ====================
@@ -201,10 +202,19 @@ Additional packages.
 Sphinx-copybutton
 -----------------
 
-`Sphinx-copybutton <https://sphinx-copybutton.readthedocs.io/>`_ is::
+    `Sphinx-copybutton <https://sphinx-copybutton.readthedocs.io/>`_
 
-    Sphinx-copybutton does one thing: add a little “copy” button to
-     the right of your code blocks.
+    .. code-block:: shell
+     
+        $ pip install --upgrade sphinx-copybutton
+
+Read the Docs Theme
+-------------------
+
+    .. code-block:: shell
+
+        $ pip install --upgrade sphinx-rtd-theme
+
 
 Making our documents.
 =====================
