@@ -55,11 +55,11 @@ And download `balenaEtcher <https://www.balena.io/etcher/>`_.
 macOS
 -----
 
-    If you use Apple Mac, you can install via ``brew``.
+If you use Apple Mac, you can install via ``brew``.
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ brew cask install balenaetcher
+    $ brew cask install balenaetcher
 
 First boot
 ==========
@@ -71,23 +71,23 @@ Test remote connect
 
 On your Mac or PC, remote connecting test via ``ssh``.
 
-    .. code-block:: shell
+.. code-block:: shell
 
-        $ ssh pi@192.168.0.121
+    $ ssh pi@192.168.0.121
 
 Package upgrade
 ---------------
 
-    I recommend upgrade your Raspbian.
+I recommend upgrade your Raspbian.
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ sudo apt update
-            ...
+    $ sudo apt update
+    ...
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ sudo apt upgrade
+    $ sudo apt upgrade
 
 *******************************
 Prepare development environment
@@ -105,70 +105,70 @@ Please install
 macOS, Linux
 ------------
 
-    - `pyenv <https://github.com/pyenv/pyenv>`__
-    - `pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__
+- `pyenv <https://github.com/pyenv/pyenv>`__
+- `pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__
 
-    Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__
+Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ pyenv install 3.8.0
+    $ pyenv install 3.8.0
 
-    And setup pyenv-virtualenv
+And setup pyenv-virtualenv
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ pyenv virtualenv 3.8.0 djrpi380
+    $ pyenv virtualenv 3.8.0 djrpi380
 
-    c.f. my home directory.
+c.f. my home directory.
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ pyenv versions
-            * system (set by /Users/mitsu/.pyenv/version)
-             3.7.4
-             3.7.4/envs/djsample374
-             3.8.0
-             3.8.0/envs/djrpi380
-             djrpi380
-             djsample374
+    $ pyenv versions
+    * system (set by /Users/mitsu/.pyenv/version)
+     3.7.4
+     3.7.4/envs/djsample374
+     3.8.0
+     3.8.0/envs/djrpi380
+     djrpi380
+     djsample374
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ python --version
-            Python 2.7.16
+    $ python --version
+    Python 2.7.16
 
-    my environment directory.
+my environment directory.
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ cd ~/git/hub/django-rpi-tph-monitor
+    $ cd ~/git/hub/django-rpi-tph-monitor
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ pyenv local djrpi380
+    $ pyenv local djrpi380
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ pyenv versions
-             system
-             3.7.4
-             3.7.4/envs/djsample374
-             3.8.0
-             3.8.0/envs/djrpi380
-            * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
-             djsample374
+    $ pyenv versions
+     system
+     3.7.4
+     3.7.4/envs/djsample374
+     3.8.0
+     3.8.0/envs/djrpi380
+    * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
+     djsample374
 
 
-        .. code-block:: shell
+.. code-block:: shell
 
-            $ python --version
-            Python 3.8.0
+    $ python --version
+    Python 3.8.0
 
 MS-Windows
 ----------
 
-    If you use MS-Windows, `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv.
+If you use MS-Windows, `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv.
 
 
 Let’s begin development “Home automation application”.
