@@ -1,5 +1,6 @@
 Sphinx==3.0.3
 sphinx-copybutton==0.2.11
+sphinx-material==0.0.30
 sphinx-rtd-theme==0.4.3
 sphinxcontrib-applehelp==1.0.2
 sphinxcontrib-devhelp==1.0.2
