@@ -98,7 +98,7 @@ $ pip install git+git://github.com/mitsuhisaT/django-background-tasks.git@master
 First run server.
 
 ```shell
-$ $ ./manage.py runserver
+$ ./manage.py runserver
 ```
 
 You have to get another shell(terminal).

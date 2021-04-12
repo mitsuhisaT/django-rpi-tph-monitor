@@ -159,7 +159,6 @@ my environment directory.
     * djrpi380 (set by /Users/mitsu/git/hub/django-rpi-tph-monitor/.python-version)
      djsample374
 
-
 .. code-block:: shell
 
     $ python --version
@@ -170,6 +169,23 @@ MS-Windows
 
 If you use MS-Windows, `venv <https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv.
 
+
+Hydrogen
+========
+
+`Hydrogen <https://atom.io/packages/hydrogen>`__ is an interactive coding environment that supports Python, R, JavaScript and other Jupyter kernels.
+
+.. code-block:: shell
+
+    $ python -m ipykernel install --user --name=dj3rpi380 --display-name=dj3rpi380
+
+If you multiple pyenv versions, you may repeat this command.
+
+List your ipkernel.
+
+.. code-block:: shell
+
+    $ jupyter kernelspec list
 
 Let’s begin development “Home automation application”.
 

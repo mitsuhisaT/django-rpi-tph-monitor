@@ -1,5 +1,4 @@
-# EditorConfig is awesome:
-https://EditorConfig.org
+# EditorConfig is awesome: https://EditorConfig.org
 
 # top-most EditorConfig filr
 root = true
@@ -17,6 +16,9 @@ spaces_around_brackets = outside
 indent_style = space
 indent_size = 2
 max_line_length = 128
+
+[*.csv]
+insert_final_newline = true
 
 [*.html]
 indent_style = space
