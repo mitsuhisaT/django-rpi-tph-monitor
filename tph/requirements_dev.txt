@@ -25,7 +25,7 @@ django-compat==1.0.15
 django-compressor==2.4
 django-filter==2.4.0
 django-plotly-dash==1.6.3
-djangorestframework==3.12.4
+djangorestframework==3.11.2
 dpd-components==0.1.0
 drf-yasg==1.20.0
 flake8==3.9.0
