@@ -1,0 +1,15 @@
+{% extends "tph/tph_base.html" %}
+{% load plotly_dash %}
+{% block tphheader %}
+<h1>{{ title }}</h1>
+{% endblock %}
+{% block tphmain %}
+<div class="card border-dark" style="height: 700px;">
+  <div class="card-body">
+    {% plotly_app_bootstrap name="tph_chart" %}
+  </div>
+</div>
+{% endblock %}
+{% block tphfooter %}
+<p>Copyright&nbsp;(c)&nbsp;{{ year }}&nbsp;{{ owner }},&nbsp;All&nbsp;rights&nbsp;reserved.</p>
+{% endblock %}

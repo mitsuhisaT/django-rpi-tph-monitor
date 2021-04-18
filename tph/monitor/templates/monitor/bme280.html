@@ -1,0 +1,59 @@
+{% extends "tph/tph_base.html" %}
+{% block tphheader %}
+<h1>Show {{ title }} pressure, humidity and temperature</h1>
+{% endblock %}
+{% block tphmain %}
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+  </span>
+</div>
+<table class="table table-dark">
+  <ththead>
+    <tr> 
+      <th scope="col">date and time</th>
+      <th scope="col">pressure(hPa)</th>
+      <th scope="col">humidity(%)</th>
+      <th scope="col">temperature(Celcius(°C))</th>
+    </tr>
+  </ththead>
+  <tbody>
+  {% for bme280 in page_obj %}
+    <tr>
+      <th scope="row">{{ bme280.measure_date|date:"SHORT_DATE_FORMAT" }}&nbsp;{{ bme280.measure_date|time:"H:i:s e"}}</th>
+      <td>{{ bme280.pressure|floatformat:2 }}</td>
+      <td>{{ bme280.humidity|floatformat:2 }}</td>
+      <td>{{ bme280.temperature|floatformat:2 }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+  </span>
+</div>
+{% endblock %}
+{% block tphfooter %}
+<p>Copyright&nbsp;(c)&nbsp;{{ year }}&nbsp;{{ owner }},&nbsp;All&nbsp;rights&nbsp;reserved.</p>
+{% endblock %}
