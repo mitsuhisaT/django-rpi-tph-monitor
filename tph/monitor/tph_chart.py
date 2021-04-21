@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 
 chart = DjangoDash(name='tph_chart',
                    serve_locally=True,
-                   app_name="TPH chart application"
                    )
 
 chart.layout = html.Div(

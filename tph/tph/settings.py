@@ -25,18 +25,24 @@ SECRET_KEY = 'ci+8#r9o9s8a_@u)v*c6m%hg*+e(i6@#z3l#2po#1m6=tz4&6t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.3.19', '192.168.3.21']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'monitor.apps.MonitorConfig',
+    'compressor',
+    'background_task',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    # 'dpd_static_support',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -47,14 +53,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
+
+# https://docs.djangoproject.com/en/3.0/ref/clickjacking/
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ROOT_URLCONF = 'tph.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [Path(BASE_DIR).joinpath('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tph.wsgi.application'
 
+ASGI_APPLICATION = 'tph.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -103,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -114,7 +126,159 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
+# Plotly dash settings
 
+PLOTLY_DASH = {
+    "ws_route": "ws/channel",
+
+    "insert_demo_migrations": True,  # Insert model instances used by the demo
+
+    "http_poke_enabled": True, # Flag controlling availability of direct-to-messaging http endpoint
+
+    "view_decorator": None, # Specify a function to be used to wrap each of the dpd view functions
+
+    "cache_arguments": True, # True for cache, False for session-based argument propagation
+
+    # "serve_locally": True, # True to serve assets locally, False to use their unadulterated urls (eg a CDN)
+
+    # "stateless_loader": "demo.scaffold.stateless_app_loader",
+    }
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATIC_ROOT = Path(BASE_DIR).joinpath('static')
 STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     ps.path.join(BASE_DIR, 'static'),
+# ]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
+# Plotly components containing static content that should
+# be handled by the Django staticfiles infrastructure
+
+PLOTLY_COMPONENTS = [
+    'dash_core_components',
+    'dash_html_components',
+    # 'dash_bootstrap_components',
+    'dash_renderer',
+    'dpd_components',
+    # 'dpd_static_support',
+]
+
+
+# for SASS/SCSS
+# https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-python-way/
+# https://stackoverflow.com/questions/22515611/django-sass-compressor-django-libsass-sasscompiler-command-not-found
+
+COMPRESS_ROOT = Path(BASE_DIR).joinpath('static')
+COMPRESS_PRECOMPILERS = (
+    # ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-scss', 'pysassc {infile} {outfile}'),
+)
+
+
+PAGE_SIZE = 10
+
+# for Django Rest Framework
+# https://www.django-rest-framework.org
+# https://www.django-rest-framework.org/tutorial/quickstart/
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': PAGE_SIZE,
+}
+
+
+# for Django Background Tasks
+# https://django-background-tasks.readthedocs.io/en/latest/
+
+# MAX_ATTEMPTS = 25
+# MAX_RUN_TIME = 3600
+# BACKGROUND_TASK_RUN_ASYNC = False
+# BACKGROUND_TASK_ASYNC_THREADS = multiprocessing.cpu_count()
+# BACKGROUND_TASK_PRIORITY_ORDERING = 'DESC'
+
+
+# Logging
+# https://docs.djangoproject.com/en/3.0/topics/logging/
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} {module}.{funcName} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': 'logs/debug.log',
+        #     'formatter': 'verbose',
+        # },
+    },
+    'loggers': {
+        # 'django': {
+        #     'handlers': ['file'],
+        #     'level': 'WARNING',
+        #     'propagate': True,
+        # },
+# https://community.plot.ly/t/prevent-post-dash-update-component-http-1-1-messages/11132
+# https://github.com/plotly/dash/issues/270
+        'werkzeug': {
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        '': {
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+# for RPi TPH Monitor
+# https://www.indoorcorgielec.com/products/rpi-tph-monitor-rev2/
+
+BME280CH1_ADDR = 0x76
+BME280CH2_ADDR = 0x77
+
+# for Development on your macOS, Ubuntu or MS-Windows
+
+ON_RASPBERRY_PI = False
+USE_SMBUS2 = True
+
+
+# miscs
+
+OWNER = 'ML and AI study group.'
+COPYRIGHT_YEAR = '2019-2021'
+DATET_FORMAT = 'Y F d'
+TIME_FORMAT = 'H:i:s'
+DATETIME_FORMAT = 'r'
