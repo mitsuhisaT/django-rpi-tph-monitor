@@ -1,0 +1,29 @@
+{% extends "tph/tph_base.html" %}
+{% block tphheader %}
+<h1>{{ title }}</h1>
+{% endblock %}
+{% block tphmain %}
+<table class="table table-dark">
+  <ththead>
+    <tr> 
+      <th scope="col">date and time</th>
+      <th scope="col">pressure(hPa)</th>
+      <th scope="col">humidity(%)</th>
+      <th scope="col">temperature(Celcius(°C))</th>
+    </tr>
+  </ththead>
+  <tbody>
+  {% for bme280dc in bme280dcs %}
+    <tr>
+      <th scope="row">{{ bme280dc.mdt|date:"SHORT_DATE_FORMAT" }}&nbsp;{{ bme280dc.mdt|time:"H:i:s e"}}</th>
+      <td>{{ bme280dc.p|floatformat:2 }}</td>
+      <td>{{ bme280dc.h|floatformat:2 }}</td>
+      <td>{{ bme280dc.t|floatformat:2 }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% block tphfooter %}
+<p>Copyright&nbsp;(c)&nbsp;{{ year }}&nbsp;{{ owner }},&nbsp;All&nbsp;rights&nbsp;reserved.</p>
+{% endblock %}
