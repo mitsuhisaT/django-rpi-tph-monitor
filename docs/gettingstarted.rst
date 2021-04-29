@@ -45,6 +45,28 @@ On your development Mac, Ubuntu, or MS-Windows.
 On your target Raspberry Pi
 ---------------------------
 
+About my Raspberry Pi 3B.
+
+.. code-block:: shell
+
+    $ cat /etc/debian_version
+    10.9
+    $ uname -a
+    Linux raspi3b 5.10.17-v7+ #1403 SMP Mon Feb 22 11:29:51 GMT 2021 armv7l GNU/Linux
+
+Enable i2c via raspi-config.
+
+.. code-block:: shell
+
+    $ sudo raspi-config
+
+Add i2c group your user account.
+
+.. code-block:: shell
+
+    $ sudo usermod -aG i2c pi
+
+
 .. code-block:: shell
 
     $ pip install -r requirements_rpi.txt
@@ -56,7 +78,6 @@ And edit your tph/tph/settings.py
 
     ON_RASPBERRY_PI = True
     USE_SMBUS2 = True
-
 
 recommended IDE(Integrated Development Environment)
 ===================================================
@@ -73,6 +94,11 @@ make
 .. code-block:: shell
 
     $ Python manage.py startapp monitor
+
+.. code-block:: shell
+
+    $ Python manage.py makemigrations monitor
+
 
 Set up your data base
 =====================
@@ -162,6 +188,12 @@ Create your Django Project.
 
 Access ``http://localhost:8000/`` on your browser. |Django First Boot|
 
+For access from remote computer to Raspberry Pi, on your Raspberry Pi:
+
+.. code-block:: shell
+
+    python manage.py runserver 192.168.xxx.xxx:8000
+
 
 .. |Django First Boot| image:: ../assets/images/first-django.png
 
@@ -170,7 +202,7 @@ You have to get another shell(terminal). Second registration task.
 
 .. code-block:: shell
 
-    $ curl -X POST http://localhost:8000/monitor/tasks/5/30
+    $ curl -X GET http://localhost:8000/monitor/tasks/5/30
 
 Third run process tasks.
 
@@ -194,7 +226,11 @@ This project's documents are making with `SPHINX <https://www.sphinx-doc.org/en/
 
 .. code-block:: shell
 
-    $ pip install --upgrade sphinx
+    $ pyenv virtualenv 3.9.4 dj32rpi394docs
+    $ cd ${your django-rpi-monitor}/docs
+    $ pyenv local dj32rpi394docs
+    $ pip install --upgrade pip
+    $ pip install -r requirements.txt 
 
 Additional packages.
 ====================
