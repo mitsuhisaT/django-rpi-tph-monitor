@@ -249,7 +249,7 @@ class BME280I2C:
         self.H = (v_x1_u32r >> 12) / 1024
 
     def meas(self):
-        """Measure T/P/H."""
+        """Measure T/P/H and output T/H,P to LCD."""
         if not self.id_read():
             return False
         self.read_cal()
