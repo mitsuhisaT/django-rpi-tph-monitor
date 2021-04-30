@@ -51,7 +51,7 @@ class StoreTph():
                             pressure=self.__bme280dc.p,
                             humidity=self.__bme280dc.h,
                             )
-            logger.debug(repr(bme280))
+            logger.debug(f'BME280dc: {self.__bme280dc}')
             bme280.save()
             logger.debug('end')
             return bme280.id

@@ -28,6 +28,7 @@ else:
     module_object = import_module('smbus')
 SMBus = getattr(module_object, 'SMBus')
 
+from .lcd import LCDAQM
 
 
 logger = logging.getLogger(__name__)
@@ -256,6 +257,14 @@ class BME280I2C:
         self.comp_T()
         self.comp_P()
         self.comp_H()
+
+        lcd = LCDAQM()
+        lcd.init_lcd()
+        lcd.clear()
+        lcd.print(f'{self.T:.1f},{self.H:.0f}')
+        lcd.sec_line()
+        lcd.print(f'{self.P:.1f}')
+
         return True
 
     def print_reg(self):
@@ -265,9 +274,10 @@ class BME280I2C:
         print(f' adc_H  : {self.adc_H}')
 
     def print_meas(self):
-        print( ' Temp     : {:.1f}C'.format(self.T))
-        print( ' Pressure : {:.1f}hPa'.format(self.P))
-        print( ' Humidity : {:.1f}%'.format(self.H))
+        print(' Temp     : {:.1f}C'.format(self.T))
+        print(' Pressure : {:.1f}hPa'.format(self.P))
+        print(' Humidity : {:.1f}%'.format(self.H))
+
 
 def main():
     bme280ch1 = BME280I2C(BME280CH1_ADDR)
@@ -284,6 +294,7 @@ def main():
         bme280ch2.print_cal()
         bme280ch2.print_reg()
         bme280ch2.print_meas()
+
 
 if __name__ == '__main__':
     main()
