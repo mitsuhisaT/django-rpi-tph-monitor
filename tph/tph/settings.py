@@ -237,30 +237,28 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-        # 'file': {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': 'logs/debug.log',
-        #     'formatter': 'verbose',
-        # },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/debug.log',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
-        # 'django': {
-        #     'handlers': ['file'],
-        #     'level': 'WARNING',
-        #     'propagate': True,
-        # },
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
 # https://community.plot.ly/t/prevent-post-dash-update-component-http-1-1-messages/11132
 # https://github.com/plotly/dash/issues/270
         'werkzeug': {
-            # 'handlers': ['console', 'file'],
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'ERROR',
             'propagate': True,
         },
-        '': {
-            # 'handlers': ['console', 'file'],
-            'handlers': ['console'],
+        'tph.monitor': {
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
         },
