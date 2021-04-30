@@ -5,13 +5,15 @@ Urls definitions.
 @author mitsuhisaT <asihustim@gmail.com>
 """
 # from django.conf.urls import url
-from django.urls import include, path
+# from django.urls import include, path
+from django.urls import path
 from rest_framework import routers
 # from monitor import views
 from monitor.view_bme280list import Bme280List
 from monitor.view_tph_chart import tph_chart_view
 from monitor.views import BME280ViewSet
-from monitor.views import index, showlastmonth, tasks
+# from monitor.views import index, showlastmonth, tasks
+from monitor.views import index, tasks
 import monitor.tph_chart
 
 
@@ -29,10 +31,10 @@ urlpatterns = [
     # path('show/<int:year>/<int:month>', views.showmonth, name='showmonth'),
     # path('show/<int:year>/<int:month>/<int:day>',
     #      views.showday, name='showday'),
-    path('showlastmonth', showlastmonth, name='showlastmonth'),
+    # path('showlastmonth', showlastmonth, name='showlastmonth'),
     path('tasks/<int:rpt>/<int:untl>', tasks, name='tasks'),
-    path('rest/', include(router.urls)),
-    path('api_auth/', include('rest_framework.urls',
-                              namespace='rest_framework')),
-    path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    # path('rest/', include(router.urls)),
+    # path('api_auth/', include('rest_framework.urls',
+    #                           namespace='rest_framework')),
+    # path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
