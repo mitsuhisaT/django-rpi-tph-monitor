@@ -25,7 +25,7 @@ SECRET_KEY = 'ci+8#r9o9s8a_@u)v*c6m%hg*+e(i6@#z3l#2po#1m6=tz4&6t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.3.19', '192.168.3.21']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.16']
 
 
 # Application definition
@@ -243,6 +243,18 @@ LOGGING = {
             'filename': 'logs/debug.log',
             'formatter': 'verbose',
         },
+        'monitor': {
+            # 'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/monitor.log',
+            'formatter': 'verbose',
+        },
+        'process_tasks': {
+            # 'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/process_tasks.log',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         'django': {
@@ -257,8 +269,18 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-        'tph.monitor': {
-            'handlers': ['console', 'file'],
+        'monitor.store_tph': {
+            'handlers': ['process_tasks'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'monitor.store_tph_bg': {
+            'handlers': ['process_tasks'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'monitor': {
+            'handlers': ['monitor'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -274,7 +296,7 @@ BME280CH2_ADDR = 0x77
 
 # for Development on your macOS, Ubuntu or MS-Windows
 
-ON_RASPBERRY_PI = False
+ON_RASPBERRY_PI = True
 USE_SMBUS2 = True
 
 
