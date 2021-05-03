@@ -21,6 +21,7 @@ import logging
 import time
 from importlib import import_module
 from django.conf import settings as ts
+from django.utils import timezone
 from monitor.lcd import LCDAQM
 if ts.USE_SMBUS2:
     module_object = import_module('smbus2')
@@ -259,9 +260,10 @@ class BME280I2C:
         lcd = LCDAQM()
         lcd.init_lcd()
         lcd.clear()
-        lcd.print(f'{self.T:.1f},{self.H:.0f}')
+        lcd.print(timezone.localtime().strftime('%m%d%H%M'))
         lcd.sec_line()
-        lcd.print(f'{self.P:.1f}')
+        lcd.print(f'{self.T:.1f},{self.H:.0f}')
+        # lcd.print(f'{self.P:.1f}')
 
         return True
 
