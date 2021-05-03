@@ -17,18 +17,16 @@ https://github.com/kplindegaard/smbus2
 About smbus(SMBus)
 https://github.com/bivab/smbus-cffi
 """
-
 import logging
 import time
 from importlib import import_module
 from django.conf import settings as ts
+from monitor.lcd import LCDAQM
 if ts.USE_SMBUS2:
     module_object = import_module('smbus2')
 else:
     module_object = import_module('smbus')
 SMBus = getattr(module_object, 'SMBus')
-
-from .lcd import LCDAQM
 
 
 logger = logging.getLogger(__name__)
