@@ -262,8 +262,11 @@ class BME280I2C:
         lcd.clear()
         lcd.print(timezone.localtime().strftime('%m%d%H%M'))
         lcd.sec_line()
-        lcd.print(f'{self.T:.1f},{self.H:.0f}')
-        # lcd.print(f'{self.P:.1f}')
+        if ts.LCD_DISP_TPH == 'P':
+            lcd.print(f'{self.P:.1f}')
+        else:
+            lcd.print(f'{self.T:.1f},{self.H:.0f}')
+
 
         return True
 

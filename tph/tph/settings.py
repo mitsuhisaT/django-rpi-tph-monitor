@@ -295,6 +295,7 @@ LOGGING = {
 
 BME280CH1_ADDR = 0x76
 BME280CH2_ADDR = 0x77
+LCD_DISP_TPH = 'P'
 
 # for Development on your macOS, Ubuntu or MS-Windows
 
