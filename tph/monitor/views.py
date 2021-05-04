@@ -129,19 +129,17 @@ def bme280_csv_dl(request):
     """
     """
     qs = BME280.objects.all()
-    lookups = dl.get_lookup_fields(qs.model)
-    dataset = dl.qs2dataset(
-        qs,
-        fields=[
-            'id',
-            'measure_date',
-            'pressure',
-            'humidity',
-            'temperature',
-        ],
-    )
+    # lookups = dl.get_lookup_fields(qs.model)
+    # output order.
+    lookups = [
+        'id',
+        'measure_date',
+        'temperature',
+        'pressure',
+        'humidity',
+    ]
+    dataset = dl.qs2dataset(qs, fields=lookups)
     fp = StringIO()
-    # FIXME output order.
     writer = csv.DictWriter(fp, fieldnames=lookups)
     writer.writeheader()
     for data_item in dataset:
