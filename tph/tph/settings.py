@@ -84,12 +84,14 @@ ASGI_APPLICATION = 'tph.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/dev/ref/databases/#database-is-locked-errors
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'timeout': 20,
 }
 
 
