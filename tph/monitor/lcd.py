@@ -116,6 +116,12 @@ class LCDAQM:
         self.line = 2
         self.write_address_onebyte(0, 0xC0)
 
+    def close(self):
+        """
+        Close SMBus.
+        """
+        self.i2c.close()
+
 
 def main():
     lcd = LCDAQM()
