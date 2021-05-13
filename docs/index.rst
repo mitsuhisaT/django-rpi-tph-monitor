@@ -16,7 +16,7 @@ about
 This project aim at forecasting temperature, pressure and humidity(TPH).
 And controling air-conditioner. Home-automation with AI on Raspberry Pi and RIp TPH Monitor.
 
-This is integrated your home automation, control air-conditioner with AI
+This is integrated your home automation, controling air-conditioner with AI
 and another infrared controlled devices such as television set or
 celling light and so on.
 

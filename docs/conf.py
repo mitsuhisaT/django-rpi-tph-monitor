@@ -19,7 +19,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'TPH forecast with Raspberry Pi and TensorFlow.'
-copyright = '2020, Mitsuhisa Tanaka'
+copyright = '2020-2021, Mitsuhisa Tanaka'
 author = 'Mitsuhisa Tanaka'
 
 
@@ -41,6 +41,10 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+
+# Internationalization
+locale_dirs = ['locale/']
+gettext_compact = False
 
 
 # -- Options for HTML output -------------------------------------------------

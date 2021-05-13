@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020-2021, Mitsuhisa Tanaka
+# This file is distributed under the same license as the TPH forecast with
+# Raspberry Pi and TensorFlow. package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TPH forecast with Raspberry Pi and TensorFlow. \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-13 08:43+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../index.rst:23
+msgid "Contents:"
+msgstr "目次："
+
+#: ../../index.rst:8
+msgid "TPH forecast with Raspberry Pi and AI."
+msgstr "RaspberryPiとAIを使用したTPH予測。"
+
+#: ../../index.rst:10
+msgid "Welcome to TPH forecast with Raspberry Pi and AI's documentation!"
+msgstr "Raspberry PiとAIを使用したTPH予測のドキュメントへようこそ！"
+
+#: ../../index.rst:14
+msgid "about"
+msgstr "このプロジェクトについて"
+
+#: ../../index.rst:16
+msgid ""
+"This project aim at forecasting temperature, pressure and humidity(TPH). "
+"And controling air-conditioner. Home-automation with AI on Raspberry Pi "
+"and RIp TPH Monitor."
+msgstr ""
+"このプロジェクトは、気温、気圧、湿度（TPH）の予測を目的としています。"
+"そしてエアコンを制御します。RaspberryPiとRIpTPHモニターを使ったAIによる"
+"ホームオートメーション。"
+
+#: ../../index.rst:19
+msgid ""
+"This is integrated your home automation, control air-conditioner with AI "
+"and another infrared controlled devices such as television set or celling"
+" light and so on."
+msgstr ""
+"これはホームオートメーションと統合されており、"
+"AIによりエアコンや、テレビやシーリングライトなどの赤外線制御デバイス"
+"を制御します。"
+
+#: ../../index.rst:32
+msgid "Indices and tables"
+msgstr "索引と表索引"
+
+#: ../../index.rst:34
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:35
+msgid ":ref:`modindex`"
+msgstr ""
+
+#: ../../index.rst:36
+msgid ":ref:`search`"
+msgstr ""

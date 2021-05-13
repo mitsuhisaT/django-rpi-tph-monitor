@@ -1,0 +1,301 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020-2021, Mitsuhisa Tanaka
+# This file is distributed under the same license as the TPH forecast with
+# Raspberry Pi and TensorFlow. package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TPH forecast with Raspberry Pi and TensorFlow. \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-13 08:43+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../gettingstarted.rst:3
+msgid "Development"
+msgstr ""
+
+#: ../../gettingstarted.rst:5
+msgid ""
+"This is setup protocol for developing Home automation with Raspberry PI "
+"and AI."
+msgstr ""
+
+#: ../../gettingstarted.rst:8
+msgid "Not yet complete this project."
+msgstr ""
+
+#: ../../gettingstarted.rst:12
+msgid "Getting started"
+msgstr ""
+
+#: ../../gettingstarted.rst:16
+msgid "Requirements"
+msgstr ""
+
+#: ../../gettingstarted.rst:19
+msgid "Python modules"
+msgstr ""
+
+#: ../../gettingstarted.rst:21
+msgid "Django"
+msgstr ""
+
+#: ../../gettingstarted.rst:22
+msgid "djangorestframework"
+msgstr ""
+
+#: ../../gettingstarted.rst:23
+msgid "django-filter"
+msgstr ""
+
+#: ../../gettingstarted.rst:24
+msgid "django-background-tasks"
+msgstr ""
+
+#: ../../gettingstarted.rst:25
+msgid "dash"
+msgstr ""
+
+#: ../../gettingstarted.rst:26
+msgid "plotly"
+msgstr ""
+
+#: ../../gettingstarted.rst:27
+msgid "and so on."
+msgstr ""
+
+#: ../../gettingstarted.rst:33
+msgid "You may install Python packages via `pip`."
+msgstr ""
+
+#: ../../gettingstarted.rst:39
+msgid "On your development Mac, Ubuntu, or MS-Windows."
+msgstr ""
+
+#: ../../gettingstarted.rst:46
+msgid "On your target Raspberry Pi."
+msgstr ""
+
+#: ../../gettingstarted.rst:48
+msgid "About my Raspberry Pi 3B."
+msgstr ""
+
+#: ../../gettingstarted.rst:66
+msgid "Enable i2c via raspi-config."
+msgstr ""
+
+#: ../../gettingstarted.rst:73
+msgid "Add i2c group your user account."
+msgstr ""
+
+#: ../../gettingstarted.rst:80
+msgid "Install MariaDB."
+msgstr ""
+
+#: ../../gettingstarted.rst:82
+msgid ""
+"`How to Install MariaDB on Raspberry Pi? <https://raspberrytips.com"
+"/install-mariadb-raspberry-pi/>`__"
+msgstr ""
+
+#: ../../gettingstarted.rst:83
+msgid ""
+"`Install MariaDB on Raspberry Pi OS "
+"<https://qiita.com/kentmori-8/items/08cd190253af442df908>`__"
+msgstr ""
+
+#: ../../gettingstarted.rst:98
+msgid "Install Python 'mysqlclient' module."
+msgstr ""
+
+#: ../../gettingstarted.rst:107
+msgid "Setup timezone to MariaDB."
+msgstr ""
+
+#: ../../gettingstarted.rst:116
+msgid "Restart MariaDB."
+msgstr ""
+
+#: ../../gettingstarted.rst:124
+msgid "Install Python modules."
+msgstr ""
+
+#: ../../gettingstarted.rst:126
+msgid "You should install another python modules."
+msgstr ""
+
+#: ../../gettingstarted.rst:132
+msgid "And edit your tph/tph/settings.py"
+msgstr ""
+
+#: ../../gettingstarted.rst:141
+msgid "recommended IDE(Integrated Development Environment)"
+msgstr ""
+
+#: ../../gettingstarted.rst:143
+msgid "`Atom <https://atom.io>`__ ; base editor"
+msgstr ""
+
+#: ../../gettingstarted.rst:144
+msgid "`atom-ide <https://ide.atom.io>`__ ; make IDE base package"
+msgstr ""
+
+#: ../../gettingstarted.rst:145
+msgid ""
+"`ide-python <https://atom.io/packages/ide-python>`__ ; support Atom-IDE "
+"Python language"
+msgstr ""
+
+#: ../../gettingstarted.rst:146
+msgid ""
+"`atom-ide-debugger-python <https://atom.io/packages/atom-ide-debugger-"
+"python>`__ ; DEBUG Python"
+msgstr ""
+
+#: ../../gettingstarted.rst:147
+msgid ""
+"`Hydrogen <https://atom.io/packages/hydrogen>`__ ; interactive coding "
+"environment in atom"
+msgstr ""
+
+#: ../../gettingstarted.rst:150
+msgid "setup for Hydrogen"
+msgstr ""
+
+#: ../../gettingstarted.rst:160
+msgid "make"
+msgstr ""
+
+#: ../../gettingstarted.rst:172
+msgid "Set up your data base"
+msgstr ""
+
+#: ../../gettingstarted.rst:202
+msgid "Using SCSS/SASS"
+msgstr ""
+
+#: ../../gettingstarted.rst:204
+msgid "Set up use `Sass <https://sass-lang.com>`_ my Django project."
+msgstr ""
+
+#: ../../gettingstarted.rst:206
+msgid ""
+"See and install `How to use SCSS/SASS in your Django Project(Python Way) "
+"<https://www.accordbox.com/blog/how-use-scss-sass-your-django-project-"
+"python-way/>`__."
+msgstr ""
+
+#: ../../gettingstarted.rst:209
+msgid ""
+"Download Bootstrap Source file `here <https://getbootstrap.com/docs/4.3"
+"/getting-started/download/#source-files>`__."
+msgstr ""
+
+#: ../../gettingstarted.rst:210
+msgid "And copy SCSS files to ``static/bootstrap``."
+msgstr ""
+
+#: ../../gettingstarted.rst:216
+msgid "Install some Python modules."
+msgstr ""
+
+#: ../../gettingstarted.rst:224
+msgid "Background tasks"
+msgstr ""
+
+#: ../../gettingstarted.rst:228
+msgid ""
+"I selected `Django Background Tasks <https://github.com/arteria/django-"
+"background-tasks>`__ for save datas interval."
+msgstr ""
+
+#: ../../gettingstarted.rst:229
+msgid "For Django 3.2, ``pip install django-background-tasks``."
+msgstr ""
+
+#: ../../gettingstarted.rst:235
+msgid "Registration background tasks and execute"
+msgstr ""
+
+#: ../../gettingstarted.rst:239
+msgid "First step"
+msgstr ""
+
+#: ../../gettingstarted.rst:241
+msgid "Create your Django Project."
+msgstr ""
+
+#: ../../gettingstarted.rst:257
+msgid "Access ``http://localhost:8000/`` on your browser. |Django First Boot|"
+msgstr ""
+
+#: ../../gettingstarted.rst:266
+msgid "Django First Boot"
+msgstr ""
+
+#: ../../gettingstarted.rst:259
+msgid "For access from remote computer to Raspberry Pi, on your Raspberry Pi:"
+msgstr ""
+
+#: ../../gettingstarted.rst:269
+msgid "You have to get another shell(terminal). Second registration task."
+msgstr ""
+
+#: ../../gettingstarted.rst:275
+msgid "Third run process tasks."
+msgstr ""
+
+#: ../../gettingstarted.rst:281
+msgid ""
+"You can check tasks from your database that default is db.sqlite3. See "
+"background_task, background_task_completed_tasks, or monitor_bme280 "
+"tables."
+msgstr ""
+
+#: ../../gettingstarted.rst:287
+msgid "Documentation"
+msgstr ""
+
+#: ../../gettingstarted.rst:289
+msgid ""
+"This project's documents are making with `SPHINX <https://www.sphinx-"
+"doc.org/en/master/>`_. How to use, please see `Installing Sphinx "
+"<https://www.sphinx-doc.org/en/master/usage/installation.html>`_."
+msgstr ""
+
+#: ../../gettingstarted.rst:293
+msgid "If you are using PyEnv, you must install via ``pip``."
+msgstr ""
+
+#: ../../gettingstarted.rst:304
+msgid "Additional packages."
+msgstr ""
+
+#: ../../gettingstarted.rst:307
+msgid "Sphinx-copybutton"
+msgstr ""
+
+#: ../../gettingstarted.rst:309
+msgid "`Sphinx-copybutton <https://sphinx-copybutton.readthedocs.io/>`_"
+msgstr ""
+
+#: ../../gettingstarted.rst:316
+msgid "Read the Docs Theme"
+msgstr ""
+
+#: ../../gettingstarted.rst:324
+msgid "Making our documents."
+msgstr ""
+
+#: ../../gettingstarted.rst:326
+msgid "You can create document."
+msgstr ""
+
