@@ -42,8 +42,8 @@ On your development Mac, Ubuntu, or MS-Windows.
 
     $ pip install -r requirements_dev.txt
 
-On your target Raspberry Pi
----------------------------
+On your target Raspberry Pi.
+============================
 
 About my Raspberry Pi 3B.
 
@@ -52,20 +52,78 @@ About my Raspberry Pi 3B.
     $ cat /etc/debian_version
     10.9
     $ uname -a
-    Linux raspi3b 5.10.17-v7+ #1403 SMP Mon Feb 22 11:29:51 GMT 2021 armv7l GNU/Linux
+    Linux raspi3b 5.10.17-v7+ #1414 SMP Fri Apr 30 13:18:35 BST 2021 armv7l GNU/Linux
+    $ lsb_release -a
+    No LSB modules are available.
+    Distributor ID: Raspbian
+    Description:    Raspbian GNU/Linux 10 (buster)
+    Release:    10
+    Codename:   buster
+    $ cat /proc/device-tree/model 
+    Raspberry Pi 3 Model B Rev 1.2
 
 Enable i2c via raspi-config.
+----------------------------
 
 .. code-block:: shell
 
     $ sudo raspi-config
 
 Add i2c group your user account.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: shell
 
     $ sudo usermod -aG i2c pi
 
+Install MariaDB.
+----------------
+
+- `How to Install MariaDB on Raspberry Pi? <https://raspberrytips.com/install-mariadb-raspberry-pi/>`__
+- `Install MariaDB on Raspberry Pi OS <https://qiita.com/kentmori-8/items/08cd190253af442df908>`__
+
+.. code-block:: shell
+
+    $ sudo apt install mariadb-server
+    $ sudo mysql_secure_installation
+    Change the root password? [Y/n] y
+    Remove anonymous users? [Y/n] y
+    Disallow root login remotely? [Y/n] y
+    Remove test database and access to it? [Y/n] y
+    Reload privilege tables now? [Y/n] 
+    Cleaning up...
+
+
+Install Python 'mysqlclient' module.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: shell
+
+    $ sudo apt install python3-dev default-libmysqlclient-dev build-essential
+    $ pip install mysqlclient
+
+
+Setup timezone to MariaDB.
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: shell
+
+    $ /usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo > timezone.sql
+    $ mysql -u root -p -Dmysql < ./timezone.sql
+
+
+Restart MariaDB.
+^^^^^^^^^^^^^^^^
+
+.. code-block:: shell
+
+    $ sudo /etc/init.d/mysql restart
+
+
+Install Python modules.
+-----------------------
+
+You should install another python modules.
 
 .. code-block:: shell
 
@@ -86,6 +144,16 @@ recommended IDE(Integrated Development Environment)
 -  `atom-ide <https://ide.atom.io>`__ ; make IDE base package
 -  `ide-python <https://atom.io/packages/ide-python>`__ ; support Atom-IDE Python language
 -  `atom-ide-debugger-python <https://atom.io/packages/atom-ide-debugger-python>`__ ; DEBUG Python
+-  `Hydrogen <https://atom.io/packages/hydrogen>`__ ; interactive coding environment in atom
+
+setup for Hydrogen
+------------------
+
+.. code-block:: shell
+
+    $ pip install jupyter
+    $ python -m ipykernel install --user --name=<name> --display-name=<name>
+    $ jupyter kernelspec list
 
 ****
 make
@@ -158,7 +226,7 @@ Background tasks
 | I selected `Django Background
   Tasks <https://github.com/arteria/django-background-tasks>`__ for save
   datas interval.
-| For Django 3.0, ``pip install django-background-tasks``.
+| For Django 3.2, ``pip install django-background-tasks``.
 
 .. code-block:: shell
 

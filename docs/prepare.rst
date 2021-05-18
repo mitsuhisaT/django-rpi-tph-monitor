@@ -120,7 +120,7 @@ And setup pyenv-virtualenv
 
     $ pyenv virtualenv 3.8.0 djrpi380
 
-c.f. my home directory.
+cf. my home directory.
 
 .. code-block:: shell
 

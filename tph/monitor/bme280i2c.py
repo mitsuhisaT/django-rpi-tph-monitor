@@ -32,10 +32,6 @@ SMBus = getattr(module_object, 'SMBus')
 
 logger = logging.getLogger(__name__)
 
-# RPi TPH Monitor addresses.
-BME280CH1_ADDR = 0x76
-BME280CH2_ADDR = 0x77
-
 
 class BME280I2C:
     """
@@ -256,6 +252,7 @@ class BME280I2C:
         self.comp_T()
         self.comp_P()
         self.comp_H()
+        self.i2c.close()
 
         lcd = LCDAQM()
         lcd.init_lcd()
@@ -266,7 +263,7 @@ class BME280I2C:
             lcd.print(f'{self.P:.1f}')
         else:
             lcd.print(f'{self.T:.1f},{self.H:.0f}')
-
+        lcd.close()
 
         return True
 
@@ -282,6 +279,9 @@ class BME280I2C:
         print(' Humidity : {:.1f}%'.format(self.H))
 
 
+# RPi TPH Monitor addresses.
+BME280CH1_ADDR = 0x76
+BME280CH2_ADDR = 0x77
 def main():
     bme280ch1 = BME280I2C(BME280CH1_ADDR)
     bme280ch2 = BME280I2C(BME280CH2_ADDR)
