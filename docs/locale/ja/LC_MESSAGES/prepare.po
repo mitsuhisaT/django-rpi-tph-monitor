@@ -29,8 +29,7 @@ msgstr "Raspberry PiとAIを使用したTPH予測。"
 msgid ""
 "I explain first boot your Raspberry Pi and set up Python environment for "
 "developing."
-msgstr ""
-"最初のRaspberryPiの起動と、開発用のPython環境をセットアップする方法について説明します。"
+msgstr "最初のRaspberryPiの起動と、開発用のPython環境をセットアップする方法について説明します。"
 
 #: ../../prepare.rst:11
 msgid "This project is developing now, yet not finish."
@@ -98,8 +97,7 @@ msgstr "Raspberry Piをセットアップする必要があります。"
 msgid ""
 "On your Mac or PC(Linux, MS-Windows), you can install Raspbian to microSD"
 " card."
-msgstr ""
-"MacまたはPC（Linux、MS-Windows）では、RaspbianをmicroSDカードにインストールできます。"
+msgstr "MacまたはPC（Linux、MS-Windows）では、RaspbianをmicroSDカードにインストールできます。"
 
 #: ../../prepare.rst:42
 msgid "Download newest Raspbian"
@@ -117,9 +115,7 @@ msgstr ""
 msgid ""
 "You will choose “Raspbian Buster with desktop and recommended software” "
 "or “Raspbian Buster with desktop”."
-msgstr ""
-"「デスクトップと推奨ソフトウェアを備えたRaspbian Buster」または"
-"「デスクトップを備えたRaspbian Buster」を選択します。"
+msgstr "「デスクトップと推奨ソフトウェアを備えたRaspbian Buster」または「デスクトップを備えたRaspbian Buster」を選択します。"
 
 #: ../../prepare.rst:49
 msgid "Installing operating system image"
@@ -131,9 +127,8 @@ msgid ""
 "<https://www.raspberrypi.org/documentation/installation/installing-"
 "images/README.md>`_ for installing operating system image."
 msgstr ""
-"オペレーティングシステムイメージをインストールするには、`インストールガイド"
-"<https://www.raspberrypi.org/documentation/installation/installing-"
-"images/README.md>`_を読む必要があります。"
+"オペレーティングシステムイメージをインストールするには、`インストールガイド<https://www.raspberrypi.org/documentation/installation"
+"/installing-images/README.md>`_を読む必要があります。"
 
 #: ../../prepare.rst:53
 msgid "And download `balenaEtcher <https://www.balena.io/etcher/>`_."
@@ -158,9 +153,9 @@ msgid ""
 "``raspbian-config``. Please set fixed IP address, for example "
 "``192.168.0.121/24``."
 msgstr ""
-"初回起動時のみ、HDMI経由でUSBキーボード、USBマウス、モニターを接続する必要があります。"
-" Wi-Fiネットワークを設定し、 `raspbian-config` を介してSSHを有効にする必要があります。"
-"`192.168.0.121/24` などの固定IPアドレスを設定してください。"
+"初回起動時のみ、HDMI経由でUSBキーボード、USBマウス、モニターを接続する必要があります。 Wi-Fiネットワークを設定し、 "
+"`raspbian-config` を介してSSHを有効にする必要があります。`192.168.0.121/24` "
+"などの固定IPアドレスを設定してください。"
 
 #: ../../prepare.rst:70
 msgid "Test remote connect"
@@ -200,45 +195,48 @@ msgstr "インストールしてください"
 
 #: ../../prepare.rst:106
 msgid "macOS, Linux"
-msgstr ""
+msgstr "macOS, Linux"
 
 #: ../../prepare.rst:108
 msgid "`pyenv <https://github.com/pyenv/pyenv>`__"
-msgstr ""
+msgstr "`pyenv <https://github.com/pyenv/pyenv>`__"
 
 #: ../../prepare.rst:109
 msgid "`pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__"
-msgstr ""
+msgstr "`pyenv-virtualenv <https://github.com/pyenv/pyenv-virtualenv>`__"
 
 #: ../../prepare.rst:111
 msgid "Install Python via `PyEnv <https://github.com/pyenv/pyenv>`__"
-msgstr ""
+msgstr "`PyEnv <https://github.com/pyenv/pyenv>`__ を利用した Python のインストール"
 
 #: ../../prepare.rst:117
 msgid "And setup pyenv-virtualenv"
-msgstr ""
+msgstr "次に pyenv-virtualenv の設定"
 
 #: ../../prepare.rst:123
+#, fuzzy
 msgid "c.f. my home directory."
-msgstr ""
+msgstr "参照： 私のホームディレクトリー"
 
 #: ../../prepare.rst:141
 msgid "my environment directory."
-msgstr ""
+msgstr "開発環境"
 
 #: ../../prepare.rst:168
 msgid "MS-Windows"
-msgstr ""
+msgstr "MS-Windows"
 
 #: ../../prepare.rst:170
 msgid ""
 "If you use MS-Windows, `venv "
 "<https://docs.python.org/3.7/library/venv.html>`__ instead of pyenv."
 msgstr ""
+"MS-Windows を利用しているなら, pyenv の代わりに `venv "
+"<https://docs.python.org/3.7/library/venv.html>`__ です。"
 
 #: ../../prepare.rst:174
 msgid "Hydrogen"
-msgstr ""
+msgstr "Hydrogen"
 
 #: ../../prepare.rst:176
 msgid ""
@@ -246,29 +244,34 @@ msgid ""
 " environment that supports Python, R, JavaScript and other Jupyter "
 "kernels."
 msgstr ""
+"`Hydrogen <https://atom.io/packages/hydrogen>`__ は、Python、R、JavaScript "
+"やその他の Jupyter カーネルをサポートする対話型コーディング環境です。"
 
 #: ../../prepare.rst:182
 msgid "If you multiple pyenv versions, you may repeat this command."
-msgstr ""
+msgstr "複数のpyenvバージョンがある場合は、このコマンドを繰り返すべきです。"
 
 #: ../../prepare.rst:184
 msgid "List your ipkernel."
-msgstr ""
+msgstr "ipkernel のリスト。"
 
 #: ../../prepare.rst:190
 msgid "Let’s begin development “Home automation application”."
-msgstr ""
+msgstr "「ホームオートメーションアプリケーション」の開発を始めましょう。"
 
 #: ../../prepare.rst:194
 msgid "Documentation"
-msgstr ""
+msgstr "ドキュメンテーション"
 
 #: ../../prepare.rst:196
 msgid "We published documentation on `Read the Docs <https://readthedocs.org>`_."
-msgstr ""
+msgstr "Read the Docs <https://readthedocs.org>`_ にドキュメントを公開しました。"
 
 #: ../../prepare.rst:198
 msgid ""
 "TPH forecast with Raspberry Pi and AI `documentation <https://django-rpi-"
 "tph-monitor.readthedocs.io/en/latest/>`_."
 msgstr ""
+"Raspberry PiとAIを使用したTPH予測の `ドキュメンテーション <https://django-rpi-tph-"
+"monitor.readthedocs.io/en/latest/>`_ 。"
+
