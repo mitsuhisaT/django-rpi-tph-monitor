@@ -4,21 +4,28 @@ Views contoroller.
 @date 27 November 2019
 @author mitsuhisaT <asihustim@gmail.com>
 """
+import csv
 from importlib import import_module
+from io import StringIO
 import logging
 import deprecation
 from datetime import timedelta
 from django.conf import settings as ts
+from django.core.files import File
 from django.http import JsonResponse, HttpResponse, Http404
+from django.http import StreamingHttpResponse
+# from django.template import loader
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView
-from rest_framework import viewsets
+# from django.views.generic import ListView
+# from rest_framework import viewsets
+# from monitor import csv
+from monitor import model_csv_download as dl
 from monitor.data_container import BME280dc
 from monitor.store_tph_bg import bgStoreTph
 from monitor.models import BME280
-from monitor.serializers import BME280Serializer
+# from monitor.serializers import BME280Serializer
 if ts.ON_RASPBERRY_PI:
     module_object = import_module('monitor.bme280i2c')
 else:
@@ -35,7 +42,7 @@ def index(request):
 
 # @api_view(['GET'])
 @csrf_exempt
-def show(request):
+def current_tph(request):
     """Show current environment pressure, humidity and temperature."""
     logger.debug('start')
     bme280i2c = BME280I2C(ts.BME280CH1_ADDR)
@@ -57,6 +64,9 @@ def show(request):
     return render(request, 'monitor/show.html', context)
 
 
+@deprecation.deprecated(deprecated_in="1.0", removed_in="2.0",
+                        # current_version=__version__,
+                        details="Use the Bme280List class instead")
 def __response(request, bme280s, title):
     """Show datas from BME280."""
     logger.debug('start')
@@ -73,6 +83,9 @@ def __response(request, bme280s, title):
 
 
 @csrf_exempt
+@deprecation.deprecated(deprecated_in="1.0", removed_in="2.0",
+                        # current_version=__version__,
+                        details="Use the Bme280List class instead")
 def showlastmonth(request):
     """Show last month environment pressure, humidity and temperature."""
     logger.debug('start')
@@ -112,6 +125,33 @@ def showday(request, year: int, month: int, day: int):
     return __response(request, bme280s, title)
 
 
+def bme280_csv_dl(request):
+    """
+    """
+    qs = BME280.objects.all()
+    # lookups = dl.get_lookup_fields(qs.model)
+    # output order.
+    lookups = [
+        'id',
+        'measure_date',
+        'temperature',
+        'pressure',
+        'humidity',
+    ]
+    dataset = dl.qs2dataset(qs, fields=lookups)
+    fp = StringIO()
+    writer = csv.DictWriter(fp, fieldnames=lookups)
+    writer.writeheader()
+    for data_item in dataset:
+        writer.writerow(data_item)
+    stream_file = File(fp)
+    return StreamingHttpResponse(
+        stream_file,
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="bme280.csv"'},
+    )
+
+
 # @api_view(['POST', 'GET'])
 @csrf_exempt
 def tasks(request, rpt, untl):
@@ -131,11 +171,10 @@ def tasks(request, rpt, untl):
     else:
         logger.debug('end, status: 405')
         return JsonResponse({'status': False}, status=405)
-
-
-class BME280ViewSet(viewsets.ModelViewSet):
-    """API endpoint that allows BME280 to be viewed and edit."""
-
-    queryset = BME280.objects.all().order_by('-measure_date')
-    # queryset = BME280.objects.all()
-    serializer_class = BME280Serializer
+# 
+# 
+# class BME280ViewSet(viewsets.ModelViewSet):
+#     """API endpoint that allows BME280 to be viewed and edit."""
+# 
+#     queryset = BME280.objects.all().order_by('-measure_date')
+#     serializer_class = BME280Serializer

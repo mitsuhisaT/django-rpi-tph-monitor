@@ -1,6 +1,5 @@
 """Test."""
-from datetime import date, datetime, timedelta
-import logging
+from datetime import datetime, timedelta
 import time
 from django.conf import settings as ts
 from django.utils import timezone
@@ -69,9 +68,10 @@ class BME280ModelTests(TestCase):
         w_bme280.save()
         # time.sleep(5)
 
-        # https://docs.djangoproject.com/en/3.0/ref/databases/#sqlite-notes
+        # https://docs.djangoproject.com/en/3.2/ref/databases/#sqlite-notes
         bme280s = BME280.objects.filter(measure_date__month=lMonth.month)
         self.assertEqual(bme280s[0].temperature, 14.9)
+
 
 class BME280dcTests(TestCase):
     """Teest data container BME280dc."""

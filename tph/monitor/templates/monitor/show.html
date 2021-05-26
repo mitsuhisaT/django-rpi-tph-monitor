@@ -3,22 +3,22 @@
 <h1>{{ title }}</h1>
 {% endblock %}
 {% block tphmain %}
-<table class="table table-dark">
+<table class="table table">
   <ththead>
     <tr> 
       <th scope="col">date and time</th>
+      <th scope="col">temperature(Celcius(°C))</th>
       <th scope="col">pressure(hPa)</th>
       <th scope="col">humidity(%)</th>
-      <th scope="col">temperature(Celcius(°C))</th>
     </tr>
   </ththead>
   <tbody>
   {% for bme280dc in bme280dcs %}
     <tr>
       <th scope="row">{{ bme280dc.mdt|date:"SHORT_DATE_FORMAT" }}&nbsp;{{ bme280dc.mdt|time:"H:i:s e"}}</th>
+      <td>{{ bme280dc.t|floatformat:2 }}</td>
       <td>{{ bme280dc.p|floatformat:2 }}</td>
       <td>{{ bme280dc.h|floatformat:2 }}</td>
-      <td>{{ bme280dc.t|floatformat:2 }}</td>
     </tr>
   {% endfor %}
   </tbody>

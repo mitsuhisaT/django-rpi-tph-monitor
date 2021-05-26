@@ -25,7 +25,7 @@ SECRET_KEY = 'ci+8#r9o9s8a_@u)v*c6m%hg*+e(i6@#z3l#2po#1m6=tz4&6t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.3.19', '192.168.3.21']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.16']
 
 
 # Application definition
@@ -87,8 +87,12 @@ ASGI_APPLICATION = 'tph.routing.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/home/mitsu/.config/mariadb.cnf',
+        }
     }
 }
 
@@ -124,6 +128,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+USE_THOUSAND_SEPARATOR = True
 
 
 # Plotly dash settings
@@ -237,30 +243,50 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
-        # 'file': {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'filename': 'logs/debug.log',
-        #     'formatter': 'verbose',
-        # },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/debug.log',
+            'formatter': 'verbose',
+        },
+        'monitor': {
+            # 'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/monitor.log',
+            'formatter': 'verbose',
+        },
+        'process_tasks': {
+            # 'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/process_tasks.log',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
-        # 'django': {
-        #     'handlers': ['file'],
-        #     'level': 'WARNING',
-        #     'propagate': True,
-        # },
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
 # https://community.plot.ly/t/prevent-post-dash-update-component-http-1-1-messages/11132
 # https://github.com/plotly/dash/issues/270
         'werkzeug': {
-            # 'handlers': ['console', 'file'],
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'ERROR',
             'propagate': True,
         },
-        '': {
-            # 'handlers': ['console', 'file'],
-            'handlers': ['console'],
+        'monitor.store_tph': {
+            'handlers': ['process_tasks'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'monitor.store_tph_bg': {
+            'handlers': ['process_tasks'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'monitor': {
+            'handlers': ['monitor'],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -273,10 +299,11 @@ LOGGING = {
 
 BME280CH1_ADDR = 0x76
 BME280CH2_ADDR = 0x77
+LCD_DISP_TPH = 'P'
 
 # for Development on your macOS, Ubuntu or MS-Windows
 
-ON_RASPBERRY_PI = False
+ON_RASPBERRY_PI = True
 USE_SMBUS2 = True
 
 

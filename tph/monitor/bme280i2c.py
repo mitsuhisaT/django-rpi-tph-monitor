@@ -17,11 +17,12 @@ https://github.com/kplindegaard/smbus2
 About smbus(SMBus)
 https://github.com/bivab/smbus-cffi
 """
-
 import logging
 import time
 from importlib import import_module
 from django.conf import settings as ts
+from django.utils import timezone
+from monitor.lcd import LCDAQM
 if ts.USE_SMBUS2:
     module_object = import_module('smbus2')
 else:
@@ -29,12 +30,7 @@ else:
 SMBus = getattr(module_object, 'SMBus')
 
 
-
 logger = logging.getLogger(__name__)
-
-# RPi TPH Monitor addresses.
-BME280CH1_ADDR = 0x76
-BME280CH2_ADDR = 0x77
 
 
 class BME280I2C:
@@ -248,7 +244,7 @@ class BME280I2C:
         self.H = (v_x1_u32r >> 12) / 1024
 
     def meas(self):
-        """Measure T/P/H."""
+        """Measure T/P/H and output T/H,P to LCD."""
         if not self.id_read():
             return False
         self.read_cal()
@@ -256,6 +252,19 @@ class BME280I2C:
         self.comp_T()
         self.comp_P()
         self.comp_H()
+        self.i2c.close()
+
+        lcd = LCDAQM()
+        lcd.init_lcd()
+        lcd.clear()
+        lcd.print(timezone.localtime().strftime('%m%d%H%M'))
+        lcd.sec_line()
+        if ts.LCD_DISP_TPH == 'P':
+            lcd.print(f'{self.P:.1f}')
+        else:
+            lcd.print(f'{self.T:.1f},{self.H:.0f}')
+        lcd.close()
+
         return True
 
     def print_reg(self):
@@ -265,10 +274,14 @@ class BME280I2C:
         print(f' adc_H  : {self.adc_H}')
 
     def print_meas(self):
-        print( ' Temp     : {:.1f}C'.format(self.T))
-        print( ' Pressure : {:.1f}hPa'.format(self.P))
-        print( ' Humidity : {:.1f}%'.format(self.H))
+        print(' Temp     : {:.1f}C'.format(self.T))
+        print(' Pressure : {:.1f}hPa'.format(self.P))
+        print(' Humidity : {:.1f}%'.format(self.H))
 
+
+# RPi TPH Monitor addresses.
+BME280CH1_ADDR = 0x76
+BME280CH2_ADDR = 0x77
 def main():
     bme280ch1 = BME280I2C(BME280CH1_ADDR)
     bme280ch2 = BME280I2C(BME280CH2_ADDR)
@@ -284,6 +297,7 @@ def main():
         bme280ch2.print_cal()
         bme280ch2.print_reg()
         bme280ch2.print_meas()
+
 
 if __name__ == '__main__':
     main()
