@@ -177,6 +177,13 @@ Let’s begin development “Home automation application”.
 Documentation
 *************
 
+We divied codes and documents since 
+
+* Documents repositories
+    * `English: django-rpi-tph-docs <https://github.com/mitsuhisaT/django-rpi-tph-docs>`__
+    * `Japanese: django-rpi-tph-docs-l10n-ja <https://github.com/mitsuhisaT/django-rpi-tph-docs-l10n-ja>`__
+
+
 We published documentation on `Read the Docs <https://readthedocs.org>`_.
 
 TPH forecast with Raspberry Pi and AI `documentation <https://django-rpi-tph-monitor.readthedocs.io/en/latest/>`_.
