@@ -71,4 +71,7 @@
 コピーして利用する。
 ```csv
 date,mean_t,mean_t_qi,mean_t_hn,max_t,max_t_qi,max_t_hn,min_t,min_t_qi,min_t_hn,sum_rf,sum_rf_ni,sum_rf_qi,sum_rf_hn,dh,dh_ni,dh_qi,dh_hn,sum_sf,sum_sf_ni,sum_sf_qi,sum_sf_hn,mean_ws,mean_ws_qi,mean_ws_hn,most_wd,most_wd_qi,most_wd_hn,mean_h,mean_h_qi,mean_h_hn,mean_p,mean_p_qi,mean_p_hn,mean_cc,mean_cc_qi,mean_cc_hn,gwc_day,gwc_day_qi,gwc_day_hn,gwc_night,gwc_night_qi,gwc_night_hn
+date,mean_t,mean_t_qi,mean_t_hn,sum_rf,sum_rf_ni,sum_rf_qi,sum_rf_hn,mean_p,mean_p_qi,mean_p_hn,mean_h,mean_h_qi,mean_h_hn
+date,mean_t,mean_t_qi,mean_t_hn,mean_sp,mean_sp_qi,mean_sp_hn,mean_p,mean_p_qi,mean_p_hn
+date,mean_t,mean_t_qi,mean_t_hn,sum_rf,sum_rf_ni,sum_rf_qi,sum_rf_hn,mean_sp,mean_sp_qi,mean_sp_hn,mean_p,mean_p_qi,mean_p_hn
 ```
