@@ -136,5 +136,5 @@ def tasks(request, rpt, untl):
 class BME280ViewSet(viewsets.ModelViewSet):
     """API endpoint that allows BME280 to be viewed and edit."""
 
-    queryset = BME280.objects.all().order_by('-pub_date')
+    queryset = BME280.objects.all().order_by('-measure_date')
     serializer_class = BME280Serializer

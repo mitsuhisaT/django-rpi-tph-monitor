@@ -21,9 +21,8 @@ from monitor.models import BME280
 logger = logging.getLogger(__name__)
 
 
-chart = DjangoDash(name='tph_chart',
+chart = DjangoDash('tph_chart',
                    serve_locally=True,
-                   app_name="TPH chart application"
                    )
 
 chart.layout = html.Div(
