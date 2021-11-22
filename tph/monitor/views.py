@@ -171,10 +171,10 @@ def tasks(request, rpt, untl):
     else:
         logger.debug('end, status: 405')
         return JsonResponse({'status': False}, status=405)
-# 
-# 
-# class BME280ViewSet(viewsets.ModelViewSet):
-#     """API endpoint that allows BME280 to be viewed and edit."""
-# 
-#     queryset = BME280.objects.all().order_by('-measure_date')
-#     serializer_class = BME280Serializer
+
+
+class BME280ViewSet(viewsets.ModelViewSet):
+    """API endpoint that allows BME280 to be viewed and edit."""
+
+    queryset = BME280.objects.all().order_by('-measure_date')
+    serializer_class = BME280Serializer
